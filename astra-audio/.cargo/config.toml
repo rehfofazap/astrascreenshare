@@ -1,0 +1,3 @@
+# Sem depender do Visual C++ Redistributable no PC de quem usa (igual ao astra-audio.exe antigo, que era estático).
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]
