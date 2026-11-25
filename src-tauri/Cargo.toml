@@ -1,0 +1,64 @@
+[package]
+name = "astra-screenshare"
+version = "3.0.25"
+description = "AstraScreenShare - programa de PC (Tauri)"
+edition = "2021"
+
+[[bin]]
+name = "AstraScreenShare"
+path = "src/main.rs"
+
+[features]
+# Só para testar: aceita ASTRA_SITE/ASTRA_SERVIDOR (staging) e ASTRA_TESTE (não mexe no registro).
+teste = []
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+getrandom = "0.2"
+tauri = { version = "2", features = ["tray-icon", "image-png"] }
+tauri-plugin-single-instance = "2"
+tauri-plugin-global-shortcut = "2"
+tauri-winrt-notification = "0.7"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+base64 = "0.23"
+jpeg-encoder = "0.6"
+sha2 = "0.10"
+sha1 = "0.10"
+ed25519-dalek = "2"
+ureq = "2"
+# Lê o login guardado pelo programa antigo (Electron) direto do banco do Chromium, para quem vem de
+# uma versão que não gravava o migracao-dados.json (antes da 2.7.36).
+rusty-leveldb = "4"
+webview2-com = "0.39"
+windows = { version = "0.62", features = [
+  "Win32_Foundation",
+  "Win32_UI_WindowsAndMessaging",
+  "Win32_UI_Input_KeyboardAndMouse",
+  "Win32_UI_Shell",
+  "Win32_UI_HiDpi",
+  "Win32_Graphics_Gdi",
+  "Win32_Graphics_Dwm",
+  "Win32_Storage_Xps",
+  "Win32_System_Diagnostics_ToolHelp",
+  "Win32_System_Threading",
+  "Win32_System_Registry",
+  "Win32_System_Power",
+  "Win32_System_ProcessStatus",
+  "Win32_System_SystemInformation",
+  "Win32_System_SystemServices",
+  "Win32_System_Diagnostics_Debug",
+  "Win32_System_Kernel",
+  "Win32_System_LibraryLoader",
+  "Win32_Security_Cryptography",
+] }
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+strip = "none"
+debug = "line-tables-only"
+panic = "abort"

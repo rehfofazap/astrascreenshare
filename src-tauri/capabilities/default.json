@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Páginas do programa que falam com ele: a principal, o pop-up do chat e as janelas de captura. Os comandos conferem sozinhos quem chamou.",
+  "windows": ["principal", "popup", "cap-a", "cap-b"],
+  "permissions": ["core:event:default"]
+}
