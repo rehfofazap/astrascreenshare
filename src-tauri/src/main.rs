@@ -43,6 +43,9 @@ fn servidor() -> String {
 }
 const ORIGEM: &str = "http://tauri.localhost";
 const TOQUE_VALE: Duration = Duration::from_secs(20);
+// 3.0.27: depois de a pessoa liberar o microfone com um clique, a call pode voltar sozinha (internet caiu
+// e voltou) sem clicar de novo durante este tempo.
+const MIC_VOLTA_VALE: Duration = Duration::from_secs(30 * 60);
 
 #[derive(Clone)]
 pub struct Escolha {
@@ -71,6 +74,7 @@ pub struct Estado {
     pub protegido: AtomicBool,
     pub visor_aberto: AtomicBool,
     toque_bandeja: Mutex<Option<Instant>>,
+    mic_liberado: Mutex<Option<Instant>>,
     avisou_segundo_plano: AtomicBool,
     saindo: AtomicBool,
     minimizada: AtomicBool,
@@ -998,7 +1002,10 @@ fn ligar_silencio(app: &AppHandle, sim: bool) {
 }
 
 #[tauri::command]
-fn info_silencio() -> String {
+fn info_silencio(w: WebviewWindow) -> String {
+    if !eh_principal(&w) {
+        return String::new();
+    }
     som::info_silencio()
 }
 
@@ -1433,8 +1440,29 @@ fn criar_principal(app: &AppHandle, oculto: bool) -> tauri::Result<()> {
         .on_permission_request(|w, tipo| {
             // 3.0.17 (ASTRA-005/014): só a página principal exata (sem porta, só /index.html).
             let da_pagina = w.url().map(|u| origem_exata(&u, &["/", "/index.html"])).unwrap_or(false);
+            if !da_pagina {
+                return PermissionResponse::Deny;
+            }
             match tipo {
-                PermissionKind::Microphone | PermissionKind::Camera | PermissionKind::Autoplay if da_pagina => PermissionResponse::Allow,
+                PermissionKind::Autoplay => PermissionResponse::Allow,
+                // 3.0.27 (auditoria): microfone e câmera só logo depois de um clique/tecla de verdade com o
+                // Astra na frente. Antes bastava a página pedir: um script injetado ligaria o mic sem ninguém ver.
+                PermissionKind::Microphone | PermissionKind::Camera => {
+                    let app = w.app_handle();
+                    let mut mic = estado(app).mic_liberado.lock().unwrap();
+                    if tocou_agora(app) {
+                        if matches!(tipo, PermissionKind::Microphone) {
+                            *mic = Some(Instant::now());
+                        }
+                        PermissionResponse::Allow
+                    } else if matches!(tipo, PermissionKind::Microphone)
+                        && mic.map(|t| t.elapsed() < MIC_VOLTA_VALE).unwrap_or(false)
+                    {
+                        PermissionResponse::Allow   // voltando sozinho para a call depois de a internet cair
+                    } else {
+                        PermissionResponse::Deny
+                    }
+                }
                 _ => PermissionResponse::Deny,
             }
         })
@@ -1473,6 +1501,7 @@ fn criar_principal(app: &AppHandle, oculto: bool) -> tauri::Result<()> {
     }
     let w = b.build()?;
     janelas::vigiar_processo(app, &w);
+    janelas::permissoes_sem_lembrar(&w);
     let app2 = app.clone();
     w.on_window_event(move |e| {
         let st = estado(&app2);
@@ -1561,6 +1590,7 @@ fn main() {
                 protegido: AtomicBool::new(false),
                 visor_aberto: AtomicBool::new(false),
                 toque_bandeja: Mutex::new(None),
+                mic_liberado: Mutex::new(None),
                 avisou_segundo_plano: AtomicBool::new(false),
                 saindo: AtomicBool::new(false),
                 minimizada: AtomicBool::new(false),

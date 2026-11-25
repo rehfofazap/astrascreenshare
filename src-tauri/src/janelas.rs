@@ -506,6 +506,40 @@ pub fn fechar_desenho(app: &AppHandle) {
 pub static FALHA_PENDENTE: Mutex<Option<String>> = Mutex::new(None);
 static RECARGAS: Mutex<Vec<std::time::Instant>> = Mutex::new(Vec::new());
 
+// 3.0.27 (auditoria): o WebView2 guarda no perfil o "Permitir" do microfone/câmera, e aí a checagem do
+// clique de verdade (main.rs, on_permission_request) nunca mais rodava. Aqui a resposta deixa de ser
+// guardada, e o "Permitir" que versões antigas guardaram é apagado ao abrir (a voz continua igual: a
+// pessoa clica em "Entrar na call" e o programa libera na hora).
+pub fn permissoes_sem_lembrar(w: &WebviewWindow) {
+    let _ = w.with_webview(move |wv| unsafe {
+        use webview2_com::Microsoft::Web::WebView2::Win32::*;
+        use windows::core::Interface;
+        let Ok(core) = wv.controller().CoreWebView2() else { return };
+        let core: ICoreWebView2 = core;
+        let mut token = Default::default();
+        let _ = core.add_PermissionRequested(
+            &webview2_com::PermissionRequestedEventHandler::create(Box::new(|_, args| {
+                if let Some(a) = args {
+                    if let Ok(a3) = a.cast::<ICoreWebView2PermissionRequestedEventArgs3>() {
+                        let _ = a3.SetSavesInProfile(false);
+                    }
+                }
+                Ok(())
+            })),
+            &mut token,
+        );
+        let Ok(c13) = core.cast::<ICoreWebView2_13>() else { return };
+        let Ok(perfil) = c13.Profile() else { return };
+        let Ok(p4) = perfil.cast::<ICoreWebView2Profile4>() else { return };
+        for tipo in [COREWEBVIEW2_PERMISSION_KIND_MICROPHONE, COREWEBVIEW2_PERMISSION_KIND_CAMERA] {
+            for origem in [windows::core::w!("http://tauri.localhost"), windows::core::w!("https://tauri.localhost")] {
+                let _ = p4.SetPermissionState(tipo, origem, COREWEBVIEW2_PERMISSION_STATE_DEFAULT,
+                    &webview2_com::SetPermissionStateCompletedHandler::create(Box::new(|_| Ok(()))));
+            }
+        }
+    });
+}
+
 pub fn vigiar_processo(app: &AppHandle, w: &WebviewWindow) {
     let app2 = app.clone();
     let _ = w.with_webview(move |wv| unsafe {

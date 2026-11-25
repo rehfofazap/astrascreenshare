@@ -1,6 +1,6 @@
 [package]
 name = "astra-screenshare"
-version = "3.0.25"
+version = "3.0.27"
 description = "AstraScreenShare - programa de PC (Tauri)"
 edition = "2021"
 
