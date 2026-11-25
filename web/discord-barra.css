@@ -1,0 +1,8 @@
+/* 3.0.33: botão "Comunidade" (servidor do Astra no Discord) na barra de cima, antes do AstraDoll */
+.bt-discord-com { margin-left: auto; flex: none; display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px 0 8px;
+  border-radius: 8px; border: 1px solid rgba(88, 101, 242, .38); background: rgba(88, 101, 242, .12); color: #c9cdfb;
+  font-size: 12.5px; font-weight: 600; text-decoration: none; white-space: nowrap; transition: background .15s, border-color .15s, color .15s; }
+.bt-discord-com svg { width: 16px; height: 16px; flex: none; }
+.bt-discord-com:hover, .bt-discord-com:focus-visible { background: #5865f2; border-color: #5865f2; color: #fff; outline: none; }
+.bt-discord-com + .bt-carteira { margin-left: 10px; }
+@media (max-width: 640px) { .bt-discord-com span { display: none; } .bt-discord-com { padding: 0 7px; } }

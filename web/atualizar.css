@@ -1,0 +1,20 @@
+.atu { position: fixed; z-index: 9000; left: 50%; bottom: 20px; display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 12px; border-radius: 16px;
+  background: rgba(24, 24, 27, .82); border: 1px solid rgba(255, 255, 255, .08); box-shadow: 0 1px 0 rgba(255, 255, 255, .05) inset, 0 18px 40px -12px rgba(0, 0, 0, .7);
+  -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%); color: #fafafa; font-size: 13px; max-width: calc(100vw - 24px);
+  opacity: 0; transform: translate(-50%, 16px); pointer-events: none; transition: opacity .3s cubic-bezier(.2, .7, .2, 1), transform .3s cubic-bezier(.2, .7, .2, 1); }
+.atu.on { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.atu-ic { width: 32px; height: 32px; flex: none; display: grid; place-items: center; border-radius: 10px; background: rgba(255, 255, 255, .07); }
+.atu svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.atu-txt { display: flex; flex-direction: column; min-width: 0; line-height: 1.3; }
+.atu-txt b { font-weight: 700; white-space: nowrap; }
+.atu-txt small { color: #a1a1aa; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.atu-bt { flex: none; border: 0; border-radius: 10px; padding: 9px 14px; background: #fafafa; color: #09090b; font: inherit; font-weight: 700; cursor: pointer; transition: background .2s; }
+.atu-bt:hover { background: #fff; }
+.atu-bt:disabled { opacity: .7; cursor: default; }
+.atu-x { flex: none; width: 30px; height: 30px; border: 0; border-radius: 9px; background: none; color: #a1a1aa; display: grid; place-items: center; cursor: pointer; }
+.atu-x:hover { background: rgba(255, 255, 255, .07); color: #fafafa; }
+.atu-x svg { width: 14px; height: 14px; }
+:root[data-tema="claro"] .atu { background: rgba(255, 255, 255, .88); color: #18181b; border-color: rgba(0, 0, 0, .08); }
+:root[data-tema="claro"] .atu-bt { background: #18181b; color: #fff; }
+@media (max-width: 520px) { .atu { left: 12px; right: 12px; bottom: 12px; transform: translateY(16px); } .atu.on { transform: none; } .atu-txt small { display: none; } }
+@media (prefers-reduced-motion: reduce) { .atu { transition: none; } }

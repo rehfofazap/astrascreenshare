@@ -1,0 +1,70 @@
+/* Amigos, bloqueados, banidos (2.7.33) — usa a mesma janelinha dos Grupos (astra-v5.css .grupos/.gr-*). */
+.amigos .gr-lado { gap: 6px; }
+.am-abas { display: flex; flex-direction: column; gap: 1px; }
+.am-abas .gr-item { justify-content: space-between; }
+.am-pref { display: flex; gap: 7px; align-items: flex-start; padding: 8px 6px 2px; border-top: 1px solid var(--linha, var(--fundo-3)); font-size: 11.5px; color: var(--fraco); line-height: 1.35; cursor: pointer; }
+.am-pref input { width: auto; height: auto; margin: 1px 0 0; flex: none; accent-color: var(--texto-forte); }
+.am-pref span { flex: 1; min-width: 0; }
+.am-add { display: flex; gap: 8px; padding: 10px 14px 4px; }
+.am-add[hidden] { display: none; }
+.am-add input { flex: 1; min-width: 0; box-sizing: border-box; background: color-mix(in srgb, var(--fundo-0, #000) 60%, transparent); border: 1px solid var(--linha, var(--fundo-3));
+  border-radius: 9px; color: var(--texto-forte); font: inherit; font-size: 12.5px; padding: 7px 10px; outline: none; }
+.am-add input:focus { border-color: var(--vidro-borda-forte, var(--fraco)); }
+.amigos .am-corpo > :first-child { margin-top: 0; }
+.am-sub { margin: 10px 2px 4px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--fraco); }
+.am-sub:first-child { margin-top: 2px; }
+.am-pessoa { display: flex; align-items: center; gap: 9px; padding: 6px 6px; border-radius: 9px; }
+.am-pessoa:hover { background: color-mix(in srgb, var(--texto-forte) 5%, transparent); }
+.am-pessoa .avatar { width: 30px; height: 30px; font-size: 11px; flex: none; }
+.am-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.am-txt b, .am-txt small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.am-txt b { font-size: 12.5px; font-weight: 600; color: var(--texto-forte); }
+.am-txt small { font-size: 11px; color: var(--fraco); }
+.am-acoes { display: flex; gap: 5px; flex: none; }
+.am-acoes .bt.perigo { color: var(--vermelho, #e5484d); }
+.am-dica { margin: 6px 2px; color: var(--fraco); font-size: 12px; line-height: 1.45; }
+.am-n { margin-left: auto; }
+
+/* "⋯" ao lado de cada pessoa nas listas da sala e de online */
+.am-mais { flex: none; width: 22px; height: 22px; margin-left: 4px; border: 0; border-radius: 6px; background: transparent; color: var(--fraco);
+  display: inline-grid; place-items: center; cursor: pointer; opacity: .55; padding: 0; }
+.am-mais svg { width: 14px; height: 14px; fill: currentColor; }
+li:hover > .am-mais, .am-mais:focus-visible, .am-mais:hover { opacity: 1; }
+.am-mais:hover { background: var(--fundo-3); color: var(--texto-forte); }
+.gr-menu.am-menu { position: fixed; right: auto; top: 0; z-index: 9999; }
+
+/* Nicks raros (4 letras Raro, 3 Épico, 1–2 Lendário) */
+/* 2.7.33: insígnia única (cristal) de quem tem nome de usuário Raro, Épico ou Lendário */
+.nick-raro { display: inline-flex; margin-left: 5px; vertical-align: -2px; line-height: 0; flex: none; }
+.nick-raro svg { width: 15px; height: 15px; filter: drop-shadow(0 0 3px rgba(190, 130, 240, .45)); }
+.nick-raro.nr-raro, b.nr-raro { color: #4ea8ff; }
+.nick-raro.nr-epico, b.nr-epico { color: #b77dff; }
+.nick-raro.nr-lendario, b.nr-lendario { color: #ffb627; }
+.nick-raros-info { font-size: 12px; }
+.nick-acao { margin-top: 8px; }
+
+/* Equipe do Astra (donos) */
+.selo-equipe { display: inline-flex; margin-left: 5px; vertical-align: -2px; line-height: 0; flex: none; }
+.selo-equipe svg { filter: drop-shadow(0 0 3px rgba(160, 90, 230, .5)); }
+
+@media (max-width: 700px) {
+  .amigos .gr-lado { width: 120px; }
+  .am-acoes .bt { padding-inline: 8px; }
+}
+
+/* 2.7.33: Mensagens = abas "Conversas | Grupos" (os Grupos saíram do trilho e ficam aqui dentro) */
+.msg-abas { flex: 1; display: flex; gap: 4px; min-width: 0; }
+.msg-aba { border: 0; background: transparent; color: var(--fraco); font: inherit; font-size: 13px; font-weight: 600; padding: 5px 10px; border-radius: 8px;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.msg-aba:hover { color: var(--texto-forte); background: var(--fundo-3); }
+.msg-aba.on { color: var(--texto-forte); background: color-mix(in srgb, var(--texto-forte) 9%, transparent); }
+.msg-aba-n { background: var(--vermelho, #e5484d); color: #fff; font-size: 9.5px; font-weight: 800; border-radius: 8px; min-width: 15px; height: 15px;
+  display: inline-grid; place-items: center; padding: 0 4px; }
+.gr-lado-cab .msg-abas { gap: 2px; }
+.gr-lado-cab .msg-aba { padding: 4px 7px; font-size: 12px; }
+/* 2.7.33: nome de exibição (Configurações > Minha conta) e @usuário no cartão */
+.cfg-exibicao { display: flex; gap: 8px; margin-top: 8px; max-width: 420px; }
+.cfg-exibicao input { flex: 1; min-width: 0; box-sizing: border-box; background: color-mix(in srgb, var(--fundo-0, #000) 60%, transparent); border: 1px solid var(--linha, var(--fundo-3));
+  border-radius: 9px; color: var(--texto-forte); font: inherit; font-size: 13px; padding: 7px 10px; outline: none; }
+.cfg-exibicao input:focus { border-color: var(--vidro-borda-forte, var(--fraco)); }
+.cp-usuario { color: var(--fraco); font-size: 12px; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

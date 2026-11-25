@@ -1,0 +1,106 @@
+/* Início novo (site da Astra): boas-vindas com a personagem, criar sala com sugestões
+   e o mini tutorial "Primeiros passos". Só vale dentro de .inicio-v2. */
+.inicio-v2 { --iv-red: #f4f4f5; --iv-crimson: #a1a1aa; --iv-violet: #52525b; --iv-rose: #e4e4e7;
+  padding: 28px 28px 40px; gap: 22px; align-items: stretch; }
+.inicio-v2 > * { width: 100%; max-width: 1040px; margin-inline: auto; }
+
+/* faixa de boas-vindas */
+.iv-hero { position: relative; overflow: hidden; border-radius: 20px; padding: 34px 36px; min-height: 210px;
+  background:
+    radial-gradient(380px 300px at 86% 30%, rgba(255, 255, 255, .14), transparent 70%),
+    radial-gradient(500px 340px at 70% 120%, rgba(255, 255, 255, .08), transparent 70%),
+    linear-gradient(120deg, #101012 0%, #1f1f23 55%, #3a3a40 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14), inset 0 1px 0 rgba(255, 255, 255, .2), 0 18px 40px rgba(0, 0, 0, .25); }
+.iv-hero::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 0 58%, rgba(255, 255, 255, .04) 58% 100%); }
+.iv-hero-txt { position: relative; z-index: 2; max-width: 560px; text-align: left; }
+.iv-ola { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
+  color: #f4f4f5; background: rgba(255, 255, 255, .08); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); padding: 5px 12px; border-radius: 999px; }
+.iv-ola::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--iv-red); box-shadow: 0 0 10px var(--iv-red); }
+.iv-hero h1 { margin: 12px 0 0; font-size: 32px; line-height: 1.1; letter-spacing: -.02em; color: #fff; }
+.iv-hero .sub { margin: 8px 0 0; color: #d4d4d8; font-size: 15px; }
+.iv-hero .selos { justify-content: flex-start; margin-top: 16px; }
+.iv-hero .selos li { background: rgba(0, 0, 0, .22); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); }
+.iv-hero .selos svg { color: var(--iv-rose); }
+.iv-girl { position: absolute; z-index: 1; right: 0; top: 0; height: 100%; width: 58%; object-fit: cover; object-position: 50% 24%; pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 40%); mask-image: linear-gradient(90deg, transparent 0, #000 40%); opacity: .95;
+  animation: none; }
+@keyframes iv-flutua { 50% { transform: translateY(-8px); } }
+.iv-rever { margin-top: 14px; background: none; border: 0; padding: 0; color: #e4e4e7; font: inherit; font-size: 13px; font-weight: 700;
+  text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+/* grade: criar sala + tutorial */
+.iv-grade { display: grid; grid-template-columns: 1fr 1.15fr; gap: 16px; }
+.iv-grade.sem-tutorial { grid-template-columns: 1fr; max-width: 560px; }
+.inicio-v2 .cartao { border-radius: 16px; padding: 22px; gap: 14px; background: var(--vidro, rgba(255,255,255,.04)); box-shadow: inset 0 0 0 1px var(--vidro-borda, rgba(255,255,255,.08)), inset 0 1px 0 rgba(255, 255, 255, .06); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.iv-cab { display: flex; align-items: center; gap: 12px; }
+.iv-cab h2 { margin: 0; font-size: 17px; }
+.iv-cab .sub { margin: 2px 0 0; font-size: 13px; }
+.iv-ic { flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: var(--texto-forte);
+  background: var(--vidro-forte, rgba(255,255,255,.08)); box-shadow: inset 0 0 0 1px var(--vidro-borda-forte, rgba(255,255,255,.2)); }
+.iv-ic-2 { }
+.iv-x { margin-left: auto; align-self: flex-start; width: 30px; height: 30px; border-radius: 8px; border: 0; background: transparent;
+  color: var(--fraco); font-size: 22px; line-height: 1; cursor: pointer; }
+.iv-x:hover { background: var(--fundo-3); color: var(--texto-forte); }
+
+.iv-criar input { height: 44px; border-radius: 10px; }
+.iv-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.iv-chips button { border: 0; cursor: pointer; font: inherit; font-size: 13px; font-weight: 600; color: var(--texto); padding: 6px 12px; border-radius: 999px;
+  background: var(--fundo-0); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .07); transition: box-shadow .15s, color .15s, transform .15s; }
+.iv-chips button:hover { color: var(--texto-forte); box-shadow: inset 0 0 0 1px var(--vidro-borda-forte, rgba(255,255,255,.3)); transform: translateY(-1px); }
+.inicio-v2 .iv-bt { height: 44px; border-radius: 10px; font-weight: 700; font-size: 15px; border: 0;
+  color: #111113; background: linear-gradient(180deg, #fafafa, #c9c9cf); box-shadow: inset 0 1px 0 #fff, 0 8px 22px rgba(0, 0, 0, .25); transition: transform .15s, box-shadow .2s, filter .2s; }
+.inicio-v2 .iv-bt:hover { transform: translateY(-1px); filter: brightness(1.08); box-shadow: inset 0 1px 0 #fff, 0 10px 28px rgba(0, 0, 0, .35); }
+.iv-dica { margin: 0; font-size: 12.5px; color: var(--fraco); }
+.iv-dica b { color: var(--texto-forte); }
+
+/* tutorial */
+.iv-barra { height: 6px; border-radius: 999px; background: var(--fundo-0); overflow: hidden; }
+.iv-barra i { display: block; height: 100%; width: 0; border-radius: inherit; transition: width .5s ease;
+  background: linear-gradient(90deg, var(--iv-crimson), var(--iv-red)); box-shadow: 0 0 10px rgba(255, 255, 255, .35); }
+.iv-passos { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.iv-passos li { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; background: var(--fundo-0);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04); transition: background .2s, box-shadow .2s, opacity .2s; }
+.iv-passos li > div { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.iv-passos b { font-size: 14px; color: var(--texto-forte); }
+.iv-passos small { font-size: 12.5px; color: var(--fraco); line-height: 1.4; }
+.iv-passos em { font-style: normal; color: var(--texto); font-weight: 600; }
+.iv-n { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 13px;
+  color: var(--texto-forte); background: var(--fundo-3); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08); }
+.iv-ir { flex: none; border: 0; cursor: pointer; font: inherit; font-size: 12.5px; font-weight: 700; padding: 6px 12px; border-radius: 8px;
+  color: var(--texto-forte); background: var(--fundo-3); }
+.iv-ir:hover { background: var(--blurple); color: #fff; }
+.iv-passos li.atual { box-shadow: inset 0 0 0 1px var(--vidro-borda-forte, rgba(255,255,255,.3)), inset 0 1px 0 var(--brilho-borda, rgba(255,255,255,.4)); }
+.iv-passos li.atual .iv-n { color: #111113; background: linear-gradient(180deg, #fafafa, #c9c9cf); box-shadow: 0 0 12px rgba(255, 255, 255, .3); }
+.iv-passos li.feito { opacity: .62; }
+.iv-passos li.feito .iv-n { background: var(--verde); font-size: 0; }
+.iv-passos li.feito .iv-n::after { content: "✓"; font-size: 14px; }
+.iv-passos li.feito b { text-decoration: line-through; text-decoration-color: rgba(255, 255, 255, .35); }
+.iv-passos li.feito .iv-ir { display: none; }
+.iv-pronto { margin: 0; padding: 12px 14px; border-radius: 12px; font-weight: 700; font-size: 14px; color: #d8ffe6;
+  background: rgba(35, 165, 90, .14); box-shadow: inset 0 0 0 1px rgba(35, 165, 90, .4); }
+
+/* destaque rápido quando o tutorial aponta para algo */
+.iv-pisca { animation: iv-pisca 1.2s ease 2; }
+@keyframes iv-pisca { 50% { box-shadow: 0 0 0 4px rgba(255, 255, 255, .5); } }
+
+.inicio-v2 .msg:empty { display: none; }
+.inicio-v2 .vitrine { margin-top: 6px; }
+
+@media (max-width: 980px) {
+  .iv-girl { width: 66%; }
+}
+@media (max-width: 760px) {
+  .inicio-v2 { padding: 16px 14px 28px; }
+  .iv-hero { padding: 24px 20px 26px; }
+  .iv-hero-txt { max-width: 66%; }
+  .iv-hero h1 { font-size: 25px; }
+  .iv-girl { width: 80%; opacity: .45; }
+  .iv-grade { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .iv-girl { animation: none; } }
+
+/* tema claro */
+:root[data-tema="claro"] .iv-chips button, :root[data-tema="claro"] .iv-passos li, :root[data-tema="claro"] .iv-barra { background: rgba(0,0,0,.04); box-shadow: inset 0 0 0 1px rgba(0,0,0,.07); }
+:root[data-tema="claro"] .iv-passos li.feito b { text-decoration-color: rgba(0,0,0,.35); }
+:root[data-tema="claro"] .inicio-v2 .iv-bt { color: #fff; background: linear-gradient(180deg, #3a3a40, #121214); box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 8px 22px rgba(0,0,0,.18); }

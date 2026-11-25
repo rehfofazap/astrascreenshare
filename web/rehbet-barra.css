@@ -1,0 +1,126 @@
+/* ===== Barra (trilho) — mesmo desenho, mais acabamento ===== */
+.trilho { background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0) 40%), var(--painel);
+  box-shadow: var(--sombra-painel), inset 0 1px 0 rgba(255,255,255,.06); }
+:root[data-tema="claro"] .trilho { background: linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,0) 40%), var(--painel); }
+.trilho-bt { transition: background .22s var(--anim), color .2s, box-shadow .22s, transform .18s var(--anim); }
+.trilho-bt:hover { transform: translateY(-1px); }
+.trilho-bt:hover svg { transform: scale(1.06); }
+.trilho-bt svg { transition: transform .2s var(--anim); }
+.trilho-bt.ativo::before { width: 3px; top: 10px; bottom: 10px; border-radius: 0 4px 4px 0;
+  box-shadow: 0 0 10px rgba(255,255,255,.55); }
+:root[data-tema="claro"] .trilho-bt.ativo::before { box-shadow: none; }
+/* separa os atalhos de baixo (sugestões, áudio, tema) dos de cima */
+#trilho-sugestao { margin-top: 6px; }
+#trilho-sugestao::after { content: ""; position: absolute; top: -8px; left: 11px; right: 11px; height: 1px; background: var(--vidro-borda); }
+.trilho-dica { font-weight: 600; letter-spacing: .01em; }
+
+/* ===== Botão da rehbet: ficha de cassino ===== */
+.trilho-rehbet { color: #e9c46a; }
+.trilho-rehbet svg { stroke-width: 1.7; }
+.trilho-rehbet .rb-estrela { fill: currentColor; stroke: none; }
+.trilho-rehbet:hover { color: #ffd772; background: rgba(233,196,106,.1); box-shadow: inset 0 0 0 1px rgba(233,196,106,.28), 0 0 18px rgba(233,196,106,.18); }
+.trilho-rehbet:hover svg { transform: rotate(-22deg) scale(1.06); }
+.trilho-rehbet.ativo-rb { color: #ffd772; background: linear-gradient(180deg, rgba(233,196,106,.22), rgba(233,196,106,.08));
+  box-shadow: inset 0 0 0 1px rgba(233,196,106,.45), 0 6px 20px rgba(233,196,106,.18); }
+.trilho-rehbet.ativo-rb::before { content: ""; position: absolute; left: -11px; top: 10px; bottom: 10px; width: 3px; border-radius: 0 4px 4px 0;
+  background: #e9c46a; box-shadow: 0 0 10px rgba(233,196,106,.7); }
+:root[data-tema="claro"] .trilho-rehbet { color: #b8871b; }
+
+/* ===== Painel da rehbet (por cima do app, ao lado da barra) ===== */
+#rb-painel { position: fixed; z-index: 44; left: 88px; top: 10px; right: 10px; bottom: 10px; display: flex; flex-direction: column;
+  /* fundo sólido (sem backdrop-filter): desfocar a tela toda por baixo de um site animado pesa demais */
+  border-radius: var(--raio, 18px); overflow: hidden; background: #0e0d14; border: 1px solid var(--linha);
+  box-shadow: 0 20px 60px rgba(0,0,0,.45); contain: strict; }
+:root[data-tema="claro"] #rb-painel { background: #f4f4f6; }
+#rb-painel[hidden] { display: none; }
+#rb-painel.entrando { animation: rb-entra .28s var(--anim, ease) both; }
+@keyframes rb-entra { from { opacity: 0; transform: translateX(-10px) scale(.99); } to { opacity: 1; transform: none; } }
+.rb-topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px 10px 16px;
+  border-bottom: 1px solid var(--linha); background: linear-gradient(90deg, rgba(233,196,106,.08), transparent 45%); }
+.rb-marca { display: flex; align-items: center; gap: 9px; color: #e9c46a; }
+.rb-marca svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
+.rb-marca .rb-estrela { fill: currentColor; stroke: none; }
+.rb-marca b { color: var(--texto-forte); font-size: 15px; font-weight: 800; letter-spacing: -.01em; }
+.rb-atalhos { display: flex; gap: 4px; flex: 1; justify-content: center; overflow-x: auto; scrollbar-width: none; }
+.rb-atalhos::-webkit-scrollbar { display: none; }
+.rb-atalhos button { height: 32px; padding: 0 14px; border: 0; border-radius: 999px; cursor: pointer; white-space: nowrap;
+  font: inherit; font-size: 13px; font-weight: 700; color: var(--fraco); background: transparent; transition: background .2s, color .2s; }
+.rb-atalhos button:hover { color: var(--texto-forte); background: var(--vidro); }
+.rb-atalhos button.on { color: #1a1408; background: #e9c46a; box-shadow: 0 4px 14px rgba(233,196,106,.3); }
+.rb-acoes { display: flex; align-items: center; gap: 6px; }
+.rb-acao { display: inline-flex; align-items: center; gap: 7px; height: 34px; padding: 0 12px; border: 0; border-radius: 10px; cursor: pointer;
+  color: var(--texto); background: var(--vidro); box-shadow: inset 0 0 0 1px var(--vidro-borda); font: inherit; font-size: 13px; font-weight: 600;
+  transition: background .2s, color .2s; }
+.rb-acao:hover { color: var(--texto-forte); background: var(--vidro-forte); }
+.rb-icone { width: 34px; padding: 0; justify-content: center; }
+.rb-icone svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.rb-chave { display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 10px; border-radius: 10px; cursor: pointer;
+  color: var(--texto); font-size: 13px; font-weight: 600; user-select: none; }
+.rb-chave input { position: absolute; opacity: 0; pointer-events: none; }
+.rb-chave i { position: relative; width: 32px; height: 18px; border-radius: 9px; background: var(--vidro-forte); box-shadow: inset 0 0 0 1px var(--vidro-borda-forte); transition: background .2s; }
+.rb-chave i::after { content: ""; position: absolute; top: 3px; left: 3px; width: 12px; height: 12px; border-radius: 50%; background: var(--texto); transition: transform .2s var(--anim, ease); }
+.rb-chave input:checked + i { background: #e9c46a; }
+.rb-chave input:checked + i::after { transform: translateX(14px); background: #1a1408; }
+.rb-chave input:focus-visible + i { outline: 2px solid var(--texto-forte); outline-offset: 2px; }
+.rb-corpo { position: relative; flex: 1; min-height: 0; background: #0b0b10; }
+#rb-frame { width: 100%; height: 100%; border: 0; display: block; }
+.rb-aviso { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; color: var(--texto); padding: 24px; text-align: center; }
+.rb-aviso[hidden] { display: none; }
+.rb-aviso p { margin: 0; max-width: 360px; font-size: 14px; }
+.rb-girando svg { width: 46px; height: 46px; fill: none; stroke: #e9c46a; stroke-width: 1.5; animation: rb-gira 1.1s linear infinite; }
+.rb-girando .rb-estrela { fill: #e9c46a; stroke: none; }
+.rb-aviso.parado .rb-girando svg { animation: none; opacity: .5; }
+@keyframes rb-gira { to { transform: rotate(360deg); } }
+
+/* ===== Pop-up = janelinha solta: arrasta pela barra de cima, aumenta pelo canto ===== */
+#rb-painel.solta { right: auto; bottom: auto; z-index: 900; border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.10); box-shadow: 0 18px 50px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.4); }
+#rb-painel.solta.entrando { animation: rb-abre .18s ease-out both; }
+@keyframes rb-abre { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: none; } }
+#rb-painel.solta .rb-topo { cursor: move; user-select: none; padding: 7px 8px 7px 12px; gap: 8px; background: #15131c; }
+#rb-painel.solta .rb-marca svg { width: 18px; height: 18px; }
+#rb-painel.solta .rb-marca b { font-size: 13.5px; }
+#rb-painel.solta .rb-atalhos { justify-content: flex-start; }
+#rb-painel.solta .rb-atalhos button { height: 28px; padding: 0 11px; font-size: 12.5px; }
+#rb-painel.solta .rb-acao, #rb-painel.solta .rb-chave { height: 30px; font-size: 12.5px; }
+#rb-painel.solta .rb-icone { width: 30px; }
+#rb-painel.solta #rb-converter { font-size: 0; gap: 0; width: 30px; padding: 0; justify-content: center; }
+#rb-painel.solta #rb-converter img { width: 17px; height: 17px; }
+/* enquanto arrasta/aumenta, o site da rehbet não "rouba" o mouse */
+#rb-painel.mexendo { transition: none; }
+#rb-painel.mexendo #rb-frame { pointer-events: none; }
+.rb-canto { display: none; }
+#rb-painel.solta .rb-canto { display: block; position: absolute; right: 0; bottom: 0; width: 24px; height: 24px; z-index: 3; cursor: nwse-resize; touch-action: none;
+  background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,.28) 50%, rgba(255,255,255,.28) 58%, transparent 58%, transparent 68%, rgba(255,255,255,.28) 68%, rgba(255,255,255,.28) 76%, transparent 76%); }
+
+/* ===== Janela de converter AstraDoll ===== */
+#rb-fundo { position: fixed; inset: 0; z-index: 9000; background: rgba(4,6,16,.62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center; }
+#rb-fundo[hidden] { display: none; }
+#rb-caixa { width: min(380px, 92vw); background: var(--painel, rgba(18,20,34,.96)); border: 1px solid var(--linha, rgba(255,255,255,.08));
+  border-radius: 16px; padding: 22px; color: var(--texto); font-size: 14px; line-height: 1.45; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+#rb-caixa h3 { margin: 0 0 4px; font-size: 18px; color: var(--texto-forte); }
+#rb-caixa .rb-sub { margin: 0 0 16px; color: var(--fraco); font-size: 13px; }
+#rb-caixa .rb-linha { display: flex; justify-content: space-between; margin: 6px 0; }
+#rb-caixa .rb-linha b { color: var(--texto-forte); }
+#rb-caixa input { width: 100%; box-sizing: border-box; margin: 14px 0 6px; padding: 10px 12px; border-radius: 10px;
+  border: 1px solid var(--vidro-borda-forte); background: var(--vidro); color: var(--texto-forte); font-size: 16px; }
+#rb-caixa .rb-vira { color: var(--fraco); font-size: 13px; min-height: 18px; }
+#rb-caixa .rb-msg { min-height: 20px; margin: 10px 0 0; font-size: 13px; }
+#rb-caixa .rb-msg.ok { color: #6fe0a8; }
+#rb-caixa .rb-msg.erro { color: #ff8a9a; }
+#rb-caixa .rb-botoes { display: flex; gap: 8px; margin-top: 14px; }
+#rb-caixa button { flex: 1; padding: 10px; border-radius: 10px; border: 0; cursor: pointer; font-weight: 700; font: inherit; }
+#rb-ir { background: #e9c46a; color: #1a1408; }
+#rb-ir:disabled { opacity: .5; cursor: default; }
+#rb-sair { background: var(--vidro-forte); color: var(--texto); }
+
+@media (max-width: 860px) {
+  #rb-painel { left: 8px; right: 8px; top: 8px; bottom: calc(76px + env(safe-area-inset-bottom)); }
+  .rb-acao span, .rb-chave { font-size: 12px; }
+  #rb-converter { font-size: 0; gap: 0; width: 34px; padding: 0; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #rb-painel.entrando, .rb-girando svg { animation: none; }
+  .trilho-bt:hover, .trilho-bt:hover svg, .trilho-rehbet:hover svg { transform: none; }
+}

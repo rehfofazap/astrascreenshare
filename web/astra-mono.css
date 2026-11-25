@@ -1,0 +1,409 @@
+/* Astra monocromática: preto, branco e cinzas com vidro (glassmorphism).
+   Carregado depois do estilo.css: só troca cores e acabamento, não mexe no funcionamento.
+   Temas: "" (escuro, padrão), "preto" (all black) e "claro". */
+:root {
+  --fundo-0: #121214;
+  --fundo-1: #18181b;
+  --fundo-2: #1d1d20;
+  --fundo-3: #2a2a2e;
+  --usuario: #141416;
+  --texto: #e4e4e7;
+  --texto-forte: #fafafa;
+  --fraco: #9a9aa2;
+  --blurple: #5c5c63;       /* destaque: grafite (texto branco continua legível) */
+  --blurple-2: #48484e;
+  --vidro: rgba(255, 255, 255, .045);
+  --vidro-forte: rgba(255, 255, 255, .085);
+  --vidro-borda: rgba(255, 255, 255, .09);
+  --vidro-borda-forte: rgba(255, 255, 255, .22);
+  --vidro-sombra: 0 10px 30px rgba(0, 0, 0, .35);
+  --brilho-borda: rgba(255, 255, 255, .5);
+}
+:root[data-tema="preto"] {
+  --fundo-0: #0a0a0a; --fundo-1: #050505; --fundo-2: #000; --fundo-3: #1a1a1a; --usuario: #080808;
+  --blurple: #4a4a4f; --blurple-2: #3a3a3e;
+}
+:root[data-tema="claro"] {
+  --fundo-0: #e6e6ea;
+  --fundo-1: #f1f1f4;
+  --fundo-2: #f8f8fa;
+  --fundo-3: #e1e1e6;
+  --usuario: #ebebef;
+  --texto: #26262b;
+  --texto-forte: #0c0c0e;
+  --fraco: #6b6b74;
+  --blurple: #2b2b30;
+  --blurple-2: #121215;
+  --vidro: rgba(255, 255, 255, .6);
+  --vidro-forte: rgba(255, 255, 255, .85);
+  --vidro-borda: rgba(0, 0, 0, .08);
+  --vidro-borda-forte: rgba(0, 0, 0, .2);
+  --vidro-sombra: 0 10px 28px rgba(20, 20, 30, .1);
+  --brilho-borda: rgba(0, 0, 0, .25);
+  color-scheme: light;
+}
+/* ajustes do tema claro onde o estilo original usa branco fixo */
+:root[data-tema="claro"] .bt.secundario, :root[data-tema="claro"] .bt:not(.primario):not(.perigo):not(.link):not(.transmitir):not(.verde):not(.discord):not(.iv-bt) { background: #d9d9de; color: #18181b; }
+:root[data-tema="claro"] .bt:not(.primario):not(.perigo):not(.link):not(.transmitir):not(.verde):not(.discord):not(.iv-bt):hover { background: #cacad0; }
+:root[data-tema="claro"] .lista li.viva .nome b, :root[data-tema="claro"] .lista li.viva .nome small { text-shadow: none; }
+:root[data-tema="claro"] .lista li.viva .nome b { color: #0c0c0e; }
+:root[data-tema="claro"] .lista li.viva .nome small { color: #4a4a52; }
+:root[data-tema="claro"] .lateral-topo, :root[data-tema="claro"] .barra-topo { box-shadow: 0 1px 0 rgba(0, 0, 0, .07); }
+:root[data-tema="claro"] .lista-salas li.aqui .sala-item { background: rgba(0, 0, 0, .06); }
+:root[data-tema="claro"] .tema-mini.t-claro, .tema-mini.t-claro { background: #e6e6ea; }
+.tema-mini.t-claro i:nth-child(1) { background: #f1f1f4; }
+.tema-mini.t-claro i:nth-child(2) { background: #fafafa; }
+.tema-mini.t-claro i:nth-child(3) { background: #f1f1f4; }
+.tema-op.ativo { border-color: var(--texto-forte); }
+
+/* botão principal: vidro claro (igual à referência) */
+.bt.primario:not(.iv-bt) { background: linear-gradient(180deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .08)), var(--blurple);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 0 0 1px var(--vidro-borda); }
+input:focus, .sel:focus { box-shadow: 0 0 0 1.5px var(--vidro-borda-forte); }
+.lista-salas li.fixa .sala-item { box-shadow: inset 2px 0 0 var(--texto-forte); }
+.lista-mencoes li.ativa, .lista-mencoes li:hover { background: var(--vidro-forte); }
+
+/* ---------- lista de membros (Online e pessoas da sala) ---------- */
+.online { background:
+  radial-gradient(420px 260px at 100% 0%, rgba(255, 255, 255, .05), transparent 70%), var(--fundo-1); }
+.online h3#txt-online, .info-sala h3 { display: flex; align-items: center; gap: 8px; letter-spacing: .06em; }
+.online h3#txt-online::before { content: "✦"; font-size: 12px; color: var(--texto-forte); }
+.online h3#txt-online::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--vidro-borda-forte), transparent); }
+.online .busca { background: var(--vidro); border-radius: 12px; box-shadow: inset 0 0 0 1px var(--vidro-borda);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); padding: 8px 12px; }
+
+.online .lista, .info-sala .lista { display: flex; flex-direction: column; gap: 5px; padding: 2px; }
+.online .lista li, .info-sala .lista li {
+  position: relative; gap: 10px; padding: 7px 8px 7px 7px; min-height: 48px; border-radius: 14px;
+  background: var(--vidro);
+  box-shadow: inset 0 0 0 1px var(--vidro-borda);
+  -webkit-backdrop-filter: blur(12px) saturate(120%); backdrop-filter: blur(12px) saturate(120%);
+  transition: background .18s, box-shadow .18s, transform .18s, opacity .18s;
+}
+.online .lista li:hover, .info-sala .lista li:hover, .online .lista li:focus-within, .info-sala .lista li:focus-within {
+  background: var(--vidro-forte);
+  box-shadow: inset 0 0 0 1px var(--vidro-borda-forte), inset 0 1px 0 var(--brilho-borda), var(--vidro-sombra);
+}
+.online .lista li.sou-eu { box-shadow: inset 0 0 0 1px var(--vidro-borda-forte); }
+.online .lista li.offline, .info-sala .lista li.offline { opacity: .45; }
+.online .lista li.offline:hover { opacity: .75; }
+.online .lista li .avatar, .info-sala .lista li .avatar { width: 36px; height: 36px; }
+.online .lista li .avatar .bolinha, .info-sala .lista li .avatar .bolinha { border-color: var(--fundo-1); }
+.online .lista .nome b, .info-sala .lista .nome b { display: flex; align-items: center; gap: 5px; font-weight: 600; color: var(--texto-forte); }
+.online .lista .nome small, .info-sala .lista .nome small { font-size: 11.5px; }
+.lista .tag-voce { flex: none; font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 999px; color: var(--fraco);
+  background: var(--vidro-forte); box-shadow: inset 0 0 0 1px var(--vidro-borda); }
+
+/* ícones de estado ao lado do nick */
+.ics-estado { display: inline-flex; align-items: center; gap: 3px; flex: none; }
+.ic-estado { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 6px; color: var(--fraco); }
+.ic-estado.ao-vivo { color: var(--texto-forte); }
+.ic-estado.ao-vivo svg { filter: drop-shadow(0 0 4px rgba(255, 255, 255, .45)); }
+:root[data-tema="claro"] .ic-estado.ao-vivo svg { filter: none; }
+
+/* selo de vidro com o dispositivo, à direita */
+.selo-disp { flex: none; display: inline-flex; align-items: center; gap: 5px; height: 24px; padding: 0 9px 0 7px; border-radius: 999px;
+  font-size: 11px; font-weight: 600; color: var(--texto); white-space: nowrap;
+  background: var(--vidro-forte); box-shadow: inset 0 0 0 1px var(--vidro-borda), inset 0 1px 0 rgba(255, 255, 255, .06);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); cursor: default; }
+.selo-disp svg { flex: none; opacity: .9; }
+.selo-disp i { font-style: normal; }
+.selo-disp.disp-nd { color: var(--fraco); }
+/* coluna estreita ou mouse em cima (os botões aparecem): o selo vira só o ícone */
+.online .lista li:hover .selo-disp i, .online .lista li:focus-within .selo-disp i,
+.info-sala .lista li:hover .selo-disp i, .info-sala .lista .selo-disp i { display: none; }
+.online .lista li:hover .selo-disp, .info-sala .lista .selo-disp { padding: 0; width: 24px; justify-content: center; }
+.selo-disp.disp-nd i { display: none; }
+.selo-disp.disp-nd { padding: 0; width: 24px; justify-content: center; }
+
+/* dica flutuante dos ícones */
+.dica-g { position: fixed; z-index: 9999; left: 0; top: 0; max-width: 240px; padding: 6px 10px; border-radius: 10px; pointer-events: none;
+  font-size: 12px; font-weight: 600; color: var(--texto-forte); background: rgba(24, 24, 27, .82);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12), 0 8px 24px rgba(0, 0, 0, .35);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); opacity: 0; transform: translateY(2px); transition: opacity .12s, transform .12s; }
+:root[data-tema="claro"] .dica-g { background: rgba(255, 255, 255, .9); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1), 0 8px 24px rgba(0, 0, 0, .12); }
+.dica-g.aberta { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) { .online .lista li, .dica-g { transition: none; } }
+
+/* coluna estreita: o selo mostra só o ícone (o nome do aparelho fica na dica ao passar o mouse),
+   para não cortar o nick. Com espaço sobrando, mostra o nome também. */
+.online .lista { container-type: inline-size; }
+@container (max-width: 330px) {
+  .online .lista .selo-disp i { display: none; }
+  .online .lista .selo-disp { padding: 0; width: 24px; justify-content: center; }
+}
+
+/* =====================================================================
+   Sistema visual Astra (2026-11-08): trilho de navegação, painéis de vidro,
+   páginas, modais, privado, sala e celular. Só aparência e layout.
+   ===================================================================== */
+:root {
+  --raio: 18px; --raio-m: 12px; --raio-p: 10px;
+  --painel: color-mix(in srgb, var(--fundo-1) 84%, transparent);
+  --painel-centro: color-mix(in srgb, var(--fundo-2) 80%, transparent);
+  --linha: rgba(255, 255, 255, .07);
+  --sombra-painel: 0 1px 0 rgba(255, 255, 255, .04) inset, 0 18px 50px rgba(0, 0, 0, .35);
+  --anim: cubic-bezier(.2, .7, .2, 1);
+  --fundo-pagina: #09090b;
+}
+:root[data-tema="preto"] { --fundo-pagina: #000; --linha: rgba(255, 255, 255, .06); }
+:root[data-tema="claro"] { --fundo-pagina: #e4e4e9; --linha: rgba(0, 0, 0, .07);
+  --sombra-painel: 0 1px 0 rgba(255, 255, 255, .7) inset, 0 14px 40px rgba(20, 20, 30, .08); }
+
+body { background:
+  radial-gradient(900px 600px at 78% -8%, rgba(255, 255, 255, .07), transparent 62%),
+  radial-gradient(700px 500px at -5% 105%, rgba(255, 255, 255, .045), transparent 60%),
+  var(--fundo-pagina); }
+:root[data-tema="claro"] body { background:
+  radial-gradient(900px 600px at 78% -8%, rgba(255, 255, 255, .9), transparent 62%), var(--fundo-pagina); }
+:root.com-papel body { background: #000; }
+
+/* ---------- grade: trilho + salas + centro + membros ---------- */
+/* o trilho fica fora do .app (fixo na tela, numa camada própria): o .app só reserva o espaço dele */
+.app { grid-template-columns: 240px minmax(0, 1fr) 272px; gap: 10px; padding: 10px 10px 10px 88px; }
+.app.sem-lado { grid-template-columns: 240px minmax(0, 1fr); }
+.app.cinema { grid-template-columns: 1fr; padding: 0; }
+body:has(.app.cinema) .trilho { display: none; }
+.lateral, .principal, .online { min-width: 0; }
+
+.lateral, .online, .principal {
+  background: var(--painel);
+  border: 1px solid var(--linha);
+  box-shadow: var(--sombra-painel);
+  /* sem backdrop-filter aqui: ele faria os elementos "fixed" de dentro (cartões, menus) ficarem presos e cortados no painel */
+}
+.principal { background: var(--painel-centro); position: relative; container-type: inline-size; container-name: centro; }
+.online { background: radial-gradient(420px 260px at 100% 0%, rgba(255, 255, 255, .05), transparent 70%), var(--painel); }
+.app.cinema .principal { border: 0; box-shadow: none; }
+.lateral-topo, .barra-topo { border-bottom: 1px solid var(--linha); }
+.barra-topo { gap: 8px; }
+.barra-topo > b { font-weight: 700; letter-spacing: -.01em; }
+
+/* ---------- trilho de navegação ---------- */
+.trilho { position: fixed; z-index: 45; left: 10px; top: 10px; bottom: 10px; width: 68px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 0; min-height: 0;
+  border-radius: var(--raio); background: var(--painel); border: 1px solid var(--linha); box-shadow: var(--sombra-painel);
+  -webkit-backdrop-filter: blur(18px) saturate(115%); backdrop-filter: blur(18px) saturate(115%); }
+.trilho-logo { width: 38px; height: 38px; border-radius: 12px; object-fit: cover; margin-bottom: 10px;
+  box-shadow: 0 0 0 1px var(--vidro-borda-forte), 0 6px 18px rgba(0, 0, 0, .35); }
+.trilho-itens { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.trilho-bt { position: relative; width: 46px; height: 46px; border: 0; border-radius: 14px; display: grid; place-items: center; cursor: pointer;
+  color: var(--fraco); background: transparent; transition: background .2s var(--anim), color .2s, box-shadow .2s, transform .15s var(--anim); }
+.trilho-bt svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.trilho-bt span { display: none; }
+.trilho-bt:hover { color: var(--texto-forte); background: var(--vidro); box-shadow: inset 0 0 0 1px var(--vidro-borda); }
+.trilho-bt:active { transform: scale(.94); }
+.trilho-bt:focus-visible { outline: 2px solid var(--texto-forte); outline-offset: 2px; }
+.trilho-bt.ativo { color: var(--texto-forte);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .16), rgba(255, 255, 255, .06));
+  box-shadow: inset 0 0 0 1px var(--vidro-borda-forte), inset 0 1px 0 var(--brilho-borda), 0 6px 20px rgba(0, 0, 0, .3); }
+:root[data-tema="claro"] .trilho-bt.ativo { background: #fff; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1), 0 6px 16px rgba(0, 0, 0, .08); }
+.trilho-bt.ativo::before { content: ""; position: absolute; left: -11px; top: 12px; bottom: 12px; width: 3px; border-radius: 0 3px 3px 0; background: var(--texto-forte); }
+.trilho-contador { position: absolute; top: 5px; right: 5px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; font-size: 10px; font-weight: 800;
+  line-height: 16px; text-align: center; color: var(--fundo-0); background: var(--texto-forte); box-shadow: 0 0 0 2px var(--fundo-1); }
+.trilho-ponto { position: absolute; top: 9px; right: 9px; width: 7px; height: 7px; border-radius: 50%; background: var(--texto-forte);
+  box-shadow: 0 0 8px rgba(255, 255, 255, .6); animation: trilho-pulsa 2s ease-in-out infinite; }
+@keyframes trilho-pulsa { 50% { opacity: .35; } }
+.trilho-tema .ic-lua { display: none; }
+:root[data-tema="claro"] .trilho-tema .ic-sol { display: none; }
+:root[data-tema="claro"] .trilho-tema .ic-lua { display: block; }
+.trilho-dica { position: fixed; z-index: 9999; transform: translate(-4px, -50%); padding: 6px 10px; border-radius: 9px; pointer-events: none; opacity: 0;
+  font-size: 12.5px; font-weight: 600; color: var(--texto-forte); background: rgba(24, 24, 27, .88);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12), 0 8px 24px rgba(0, 0, 0, .35);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); transition: opacity .12s, transform .12s var(--anim); }
+.trilho-dica.aberta { opacity: 1; transform: translate(0, -50%); }
+:root[data-tema="claro"] .trilho-dica { background: rgba(255, 255, 255, .95); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1), 0 8px 24px rgba(0, 0, 0, .12); }
+:root.sem-moldura .trilho { --arrastar: 1; }
+:root.sem-moldura .trilho button { --arrastar: 0; }
+
+/* ---------- páginas (Jogos, Música) por cima do centro ---------- */
+.pagina { position: absolute; z-index: 6; left: 0; right: 0; top: 49px; bottom: 0; overflow-y: auto; overflow-x: hidden;
+  padding: 28px clamp(16px, 4cqw, 40px) 40px; display: flex; flex-direction: column; gap: 18px;
+  background: radial-gradient(700px 380px at 85% 0%, rgba(255, 255, 255, .045), transparent 70%), color-mix(in srgb, var(--fundo-2) 98%, var(--fundo-pagina)); }
+.pagina > * { width: 100%; max-width: 920px; margin-inline: auto; }
+.pagina.entrando { animation: pagina-entra .28s var(--anim); }
+@keyframes pagina-entra { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.pagina-cab h1 { margin: 0; font-size: 26px; letter-spacing: -.02em; }
+.pagina-cab .sub { margin-top: 4px; }
+.pagina-estado { margin: 0; color: var(--fraco); font-size: 13px; }
+.pagina-estado[hidden] { display: none; }
+.pagina-vazia { align-items: center; text-align: center; padding: 36px 24px; gap: 10px; }
+.pagina-vazia b { color: var(--texto-forte); font-size: 16px; }
+.pagina-vazia .sub { max-width: 440px; margin: 0; }
+.pagina-vazia-ic { width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; margin-bottom: 6px; color: var(--texto-forte);
+  background: var(--vidro-forte); box-shadow: inset 0 0 0 1px var(--vidro-borda-forte); }
+.pagina-vazia-ic svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.pagina-acoes { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 8px; }
+.info-inicio.destaque .lista-salas { animation: destaque-salas 1.4s var(--anim); border-radius: var(--raio-m); }
+@keyframes destaque-salas { 30% { box-shadow: 0 0 0 2px var(--vidro-borda-forte); } }
+
+/* jogos */
+.jogos-lista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 12px; }
+.jogo-cartao { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto; gap: 12px 14px; padding: 18px; border-radius: var(--raio);
+  background: var(--vidro); border: 1px solid var(--vidro-borda); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05);
+  transition: border-color .2s, transform .2s var(--anim), box-shadow .2s; }
+.jogo-cartao:hover { border-color: var(--vidro-borda-forte); transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), var(--vidro-sombra); }
+.jogo-ic { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; color: var(--texto-forte);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .14), rgba(255, 255, 255, .04)); box-shadow: inset 0 0 0 1px var(--vidro-borda-forte); }
+.jogo-cartao > div:not(.jogo-acoes) { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.jogo-cartao b { color: var(--texto-forte); font-size: 15px; }
+.jogo-cartao small { color: var(--fraco); font-size: 12.5px; line-height: 1.45; overflow-wrap: anywhere; }
+.jogo-status { align-self: flex-start; margin-top: 2px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; color: var(--fraco);
+  background: var(--vidro-forte); box-shadow: inset 0 0 0 1px var(--vidro-borda); }
+.jogo-cartao.instalado .jogo-status { color: var(--texto-forte); }
+.jogo-acoes { grid-column: 1 / -1; display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+.lista-extras .jogo-acoes { display: flex; gap: 6px; flex: none; }
+
+/* ---------- componentes base ---------- */
+.bt { border-radius: var(--raio-m); transition: background .18s, box-shadow .18s, transform .12s var(--anim), filter .18s; }
+.bt:active:not(:disabled) { transform: scale(.97); }
+.bt.secundario, .bt:not(.primario):not(.perigo):not(.link):not(.transmitir):not(.verde):not(.discord):not(.iv-bt):not(.relaxado):not(.acorde):not(.pausa):not(.parar-assistir):not(.bt-baixar) {
+  background: var(--vidro-forte); box-shadow: inset 0 0 0 1px var(--vidro-borda); color: var(--texto-forte); }
+.bt.secundario:hover, .bt:not(.primario):not(.perigo):not(.link):not(.transmitir):not(.verde):not(.discord):not(.iv-bt):not(.relaxado):not(.acorde):not(.pausa):not(.parar-assistir):not(.bt-baixar):hover {
+  background: color-mix(in srgb, var(--texto-forte) 14%, transparent); }
+.bt.primario:not(.iv-bt) { color: #111113; background: linear-gradient(180deg, #fafafa, #d4d4d8); box-shadow: inset 0 1px 0 #fff, 0 6px 18px rgba(0, 0, 0, .25); }
+.bt.primario:not(.iv-bt):hover:not(:disabled) { background: linear-gradient(180deg, #fff, #e4e4e7); }
+:root[data-tema="claro"] .bt.primario:not(.iv-bt) { color: #fff; background: linear-gradient(180deg, #3a3a40, #121214); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 6px 18px rgba(0, 0, 0, .15); }
+:root[data-tema="claro"] .bt.primario:not(.iv-bt):hover:not(:disabled) { background: linear-gradient(180deg, #46464d, #1c1c20); }
+.bt-icone { transition: background .15s, color .15s; }
+input, .sel, textarea { background: color-mix(in srgb, var(--fundo-0) 80%, transparent); box-shadow: inset 0 0 0 1px var(--vidro-borda); }
+input:focus, .sel:focus, textarea:focus { box-shadow: inset 0 0 0 1px var(--vidro-borda-forte), 0 0 0 3px color-mix(in srgb, var(--texto-forte) 8%, transparent); }
+.cartao { background: var(--vidro); border: 1px solid var(--vidro-borda); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .04); }
+h3 { letter-spacing: .06em; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--texto) 18%, transparent); border-radius: 10px; border: 3px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background-color: color-mix(in srgb, var(--texto) 30%, transparent); }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* ---------- coluna da esquerda: salas e você ---------- */
+.lista-salas { gap: 4px; }
+.lista-salas .sala-item { border-radius: var(--raio-m); transition: background .18s, box-shadow .18s; }
+.lista-salas .sala-item:hover:not(:disabled) { background: var(--vidro-forte); box-shadow: inset 0 0 0 1px var(--vidro-borda); }
+.lista-salas li.aqui .sala-item { background: var(--vidro-forte); box-shadow: inset 0 0 0 1px var(--vidro-borda-forte); }
+.lista-salas .ao-vivo { color: var(--texto-forte); }
+.lista-salas .ao-vivo::before { background: #f23f43; box-shadow: 0 0 6px rgba(242, 63, 67, .7); }
+.painel-usuario { background: var(--vidro); border: 1px solid var(--vidro-borda); }
+.recado-astra { border: 1px solid var(--vidro-borda); }
+
+/* ---------- abas da direita, chat e música ---------- */
+.abas-direita { background: var(--vidro); box-shadow: inset 0 0 0 1px var(--vidro-borda); }
+.aba-d.ativa { background: var(--vidro-forte); box-shadow: inset 0 0 0 1px var(--vidro-borda-forte); color: var(--texto-forte); }
+.form-chat { background: color-mix(in srgb, var(--fundo-0) 80%, transparent); box-shadow: inset 0 0 0 1px var(--vidro-borda); }
+.form-chat input { box-shadow: none; background: transparent; }
+.musica-cartao { background: var(--vidro); border: 1px solid var(--vidro-borda); }
+.musica-rotulo { color: var(--texto-forte); }
+.musica-volume:hover::-moz-range-progress { background: var(--texto-forte); }
+.musica-lista li:hover { background: var(--vidro-forte); }
+
+/* ---------- sala ---------- */
+.doca { gap: 8px; }
+.bt.transmitir { color: #111113; background: linear-gradient(180deg, #fafafa, #d4d4d8); box-shadow: inset 0 1px 0 #fff, 0 8px 22px rgba(0, 0, 0, .3); }
+.bt.transmitir:hover { filter: brightness(1.04); }
+.bt.transmitir.ao-vivo { color: #fff; background: linear-gradient(180deg, #ef4444, #b91c1c); }
+.bt.pausa, .bt.relaxado, .bt.parar-assistir, .bt.acorde { background: var(--vidro-forte); box-shadow: inset 0 0 0 1px var(--vidro-borda); color: var(--texto-forte); }
+.bt.pausa:hover, .bt.relaxado:hover, .bt.parar-assistir:hover, .bt.acorde:hover { background: color-mix(in srgb, var(--texto-forte) 14%, transparent); }
+:root[data-tema="claro"] .bt.transmitir { color: #fff; background: linear-gradient(180deg, #3a3a40, #121214); box-shadow: 0 8px 22px rgba(0, 0, 0, .15); }
+.bloco { box-shadow: 0 0 0 1px var(--vidro-borda), 0 14px 40px rgba(0, 0, 0, .35); }
+.vazio { color: var(--fraco); }
+
+/* ---------- janelas, avisos, cartões flutuantes ---------- */
+.modal { background: rgba(0, 0, 0, .55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.modal-caixa { background: color-mix(in srgb, var(--fundo-2) 90%, transparent); border: 1px solid var(--vidro-borda-forte);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 30px 80px rgba(0, 0, 0, .5);
+  -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); animation: modal-entra .22s var(--anim); max-width: min(780px, 100%); }
+@keyframes modal-entra { from { opacity: 0; transform: translateY(8px) scale(.985); } to { opacity: 1; transform: none; } }
+.aviso-card { background: color-mix(in srgb, var(--usuario) 86%, transparent); border: 1px solid var(--vidro-borda-forte);
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); box-shadow: 0 16px 40px rgba(0, 0, 0, .4); }
+.privado { left: 334px; border-radius: var(--raio); background: color-mix(in srgb, var(--fundo-2) 90%, transparent); border: 1px solid var(--vidro-borda-forte);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 30px 80px rgba(0, 0, 0, .5); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
+  animation: modal-entra .22s var(--anim); overflow: hidden; }
+.pv-topo, .pv-rodape { border-color: var(--linha); }
+.pv-item:hover { background: var(--vidro-forte); }
+.pv-msg.minha .pv-balao { background: #f4f4f5; color: #111113; }
+:root[data-tema="claro"] .pv-msg.minha .pv-balao { background: #18181b; color: #fafafa; }
+.pv-enviar { background: #f4f4f5; color: #111113; }
+:root[data-tema="claro"] .pv-enviar { background: #18181b; color: #fafafa; }
+.pv-nlidas { background: var(--texto-forte); color: var(--fundo-0); }
+.menu-status { background: color-mix(in srgb, var(--fundo-0) 92%, transparent); border-color: var(--vidro-borda-forte);
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border-radius: var(--raio-m); }
+.vitrine-janela { -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.vitrine { max-width: 100%; min-width: 0; }
+
+/* Início: cabe no centro em qualquer largura (o trilho deixou o centro um pouco menor) */
+.inicio-v2 > * { max-width: min(1040px, 100%); flex-shrink: 0; }   /* sem encolher: a faixa e os cartões não cortam mais o conteúdo */
+@container centro (max-width: 820px) {
+  .iv-grade { grid-template-columns: minmax(0, 1fr); }
+  .iv-hero-txt { max-width: 64%; }
+}
+@container centro (max-width: 560px) {
+  .iv-hero { padding: 24px 20px; }
+  .iv-hero-txt { max-width: 100%; }
+  .iv-hero h1 { font-size: 25px; }
+  .iv-girl { width: 100%; opacity: .28; }
+  .doca { flex-wrap: wrap; justify-content: center; }
+}
+.iv-passos li > div, .iv-cab > div { min-width: 0; }
+.iv-hero .selos { flex-wrap: wrap; }
+
+/* ---------- celular: o trilho vira uma barra de vidro embaixo ---------- */
+@media (max-width: 860px) {
+  .app { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 8px 8px calc(80px + env(safe-area-inset-bottom)); }
+  .app.cinema { padding: 0; }
+  .app.sem-lado { grid-template-columns: minmax(0, 1fr); }
+  .trilho { width: auto; left: 8px; right: 8px; bottom: calc(8px + env(safe-area-inset-bottom)); top: auto;
+    flex-direction: row; justify-content: space-around; padding: 6px; border-radius: 20px;
+    background: color-mix(in srgb, var(--fundo-1) 78%, transparent); border-color: var(--vidro-borda-forte); }
+  .trilho-logo { display: none; }
+  .trilho-itens { flex-direction: row; justify-content: space-around; flex: 1; }
+  .trilho-bt { width: auto; min-width: 58px; height: 52px; padding: 4px 8px; display: flex; flex-direction: column; gap: 3px; align-items: center; justify-content: center; }
+  .trilho-bt svg { width: 20px; height: 20px; }
+  .trilho-bt span { display: block; font-size: 10.5px; font-weight: 600; line-height: 1; }
+  .trilho-bt.ativo::before { display: none; }
+  .trilho-tema { min-width: 46px; }
+  .trilho-tema span { display: none; }
+  .avisos { bottom: calc(88px + env(safe-area-inset-bottom)); }
+  .privado { left: 8px; right: 8px; width: auto; bottom: calc(84px + env(safe-area-inset-bottom)); max-height: calc(100dvh - 110px); }
+  .pagina { padding: 22px 16px 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pagina.entrando, .modal-caixa, .privado, .trilho-ponto { animation: none; }
+  .trilho-bt, .jogo-cartao, .bt { transition: none; }
+}
+/* ---------- ajustes da revisão (prints de teste) ---------- */
+/* o logo já fica no trilho: a coluna das salas mostra só o nome */
+.lateral-topo .logo { display: none; }
+/* a faixa de boas-vindas continua escura no tema claro: os selos precisam de texto claro */
+:root[data-tema="claro"] .iv-hero .selos li { color: #e4e4e7; }
+:root[data-tema="claro"] .iv-hero .selos svg { color: #fafafa; }
+/* "Melhor que uma Jam" e o selo BETA no tom da Astra */
+.musica-jam { background: var(--vidro); border: 1px solid var(--vidro-borda); }
+.musica-jam li::before { border-color: var(--texto-forte) !important; }
+.musica-jam .beta { background: var(--vidro-forte) !important; color: var(--texto-forte) !important; box-shadow: inset 0 0 0 1px var(--vidro-borda-forte); }
+/* privado: o cadeado e a chave usam o tom da Astra, não verde */
+.pv-privacidade { background: var(--vidro); border: 1px solid var(--vidro-borda); }
+.pv-privacidade p svg { color: var(--texto-forte); }
+/* ---------- minigames por cima do app (MyWaifu) ----------
+   A alça e a carta do MyWaifu nascem na borda esquerda: no PC, começam depois do trilho.
+   A carta ganha fundo de vidro para ser legível em cima de qualquer tela. */
+@media (min-width: 861px) {
+  html body #mw-alca, html body #mw-carteira { margin-left: 78px; }
+}
+html body #mw-carteira.aparicao { background: rgba(12, 12, 14, .82); border: 1px solid rgba(255, 255, 255, .14); border-radius: 20px;
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); box-shadow: 0 30px 80px rgba(0, 0, 0, .55); overflow: hidden; }
+@media (max-width: 860px) {
+  html body #mw-carteira.aparicao { left: 50%; width: min(320px, calc(100vw - 24px)); margin-left: calc(min(320px, calc(100vw - 24px)) / -2); }
+}
+/* com uma janela aberta, o trilho escurece junto com o resto (e não recebe cliques) */
+body:has(.modal:not([hidden])) .trilho { opacity: .3; filter: blur(2px); pointer-events: none; transition: opacity .2s, filter .2s; }
+
+/* 2.7.20: no tema All black as regras antigas do estilo.css (":root[data-tema=preto] .bt") passavam por cima
+   destas e deixavam os botões cinza com letra escura. Aqui elas valem de novo no All black. */
+:root[data-tema="preto"] .bt.secundario, :root[data-tema="preto"] .bt:not(.primario):not(.perigo):not(.link):not(.transmitir):not(.verde):not(.discord):not(.iv-bt):not(.relaxado):not(.acorde):not(.pausa):not(.parar-assistir):not(.bt-baixar) {
+  background: var(--vidro-forte); box-shadow: inset 0 0 0 1px var(--vidro-borda); color: var(--texto-forte); }
+:root[data-tema="preto"] .bt.secundario:hover, :root[data-tema="preto"] .bt:not(.primario):not(.perigo):not(.link):not(.transmitir):not(.verde):not(.discord):not(.iv-bt):not(.relaxado):not(.acorde):not(.pausa):not(.parar-assistir):not(.bt-baixar):hover {
+  background: color-mix(in srgb, var(--texto-forte) 14%, transparent); }
+:root[data-tema="preto"] .bt.primario:not(.iv-bt) { color: #111113; background: linear-gradient(180deg, #fafafa, #d4d4d8); box-shadow: inset 0 1px 0 #fff, 0 6px 18px rgba(0, 0, 0, .25); }
+:root[data-tema="preto"] .bt.primario:not(.iv-bt):hover:not(:disabled) { background: linear-gradient(180deg, #fff, #e4e4e7); }
+:root[data-tema="preto"] .bt.pausa, :root[data-tema="preto"] .bt.relaxado, :root[data-tema="preto"] .bt.parar-assistir, :root[data-tema="preto"] .bt.acorde { background: var(--vidro-forte); box-shadow: inset 0 0 0 1px var(--vidro-borda); color: var(--texto-forte); }
+:root[data-tema="preto"] .bt.pausa:hover, :root[data-tema="preto"] .bt.relaxado:hover, :root[data-tema="preto"] .bt.parar-assistir:hover, :root[data-tema="preto"] .bt.acorde:hover { background: color-mix(in srgb, var(--texto-forte) 14%, transparent); }

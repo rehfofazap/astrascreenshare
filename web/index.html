@@ -1,0 +1,1239 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' blob: 'wasm-unsafe-eval'; object-src 'none'; base-uri 'self'; style-src 'self' https:; connect-src 'self' wss://astrascreenshare.com https://astrascreenshare.com ws://127.0.0.1:*; img-src 'self' data: blob: https://astrascreenshare.com https://*.anilist.co https://ddragon.leagueoflegends.com https://media.valorant-api.com https://static.wikia.nocookie.net https://*.ytimg.com https://*.sndcdn.com https://i.scdn.co https://*.tenor.com https://*.klipy.com https://*.giphy.com; frame-src 'self' https:; media-src 'self' blob: mediastream: https:">
+<title>AstraScreenShare</title>
+<meta name="theme-color" content="#1e1f22">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icone-192.png">
+<link rel="apple-touch-icon" href="icone-192.png">
+<link rel="stylesheet" href="estilo.css?v=2">
+  <link rel="stylesheet" href="inicio.css?v=2">
+  <link rel="stylesheet" href="astra-mono.css?v=4">
+  <link rel="stylesheet" href="astra-v4.css?v=5">
+  <link rel="stylesheet" href="abertura.css?v=1">
+  <link rel="stylesheet" href="astra-v5.css?v=29">
+  <link rel="stylesheet" href="rehbet-barra.css?v=3">
+  <link rel="stylesheet" href="atualizar.css?v=1">
+<link rel="stylesheet" href="amigos.css?v=5">
+<link rel="stylesheet" href="sala-link.css?v=1">
+<link rel="stylesheet" href="perfil-link.css?v=1">
+<link rel="stylesheet" href="suporte.css?v=1">
+  <meta name="astra-build" content="2f769107f58b">
+  <link rel="preload" href="astra-marca.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="astra-inicio.webp?v=2" as="image">
+  <!-- Baixa todos os scripts do fim da página ao mesmo tempo (antes vinham um por um, ~170 ms cada).
+       Só o download fica paralelo: a ordem de execução continua a dos <script> lá embaixo. -->
+  <link rel="preload" href="abertura.js?v=5" as="script">
+  <link rel="preload" href="celular.js" as="script">
+  <link rel="preload" href="desktop.js" as="script">
+  <link rel="preload" href="app.js?v=42" as="script">
+  <link rel="preload" href="inicio.js?v=5" as="script">
+  <link rel="preload" href="aposta.js" as="script">
+  <link rel="preload" href="correio.js?v=2" as="script">
+  <link rel="preload" href="privado.js?v=4" as="script">
+  <link rel="preload" href="papel.js" as="script">
+  <link rel="preload" href="trava.js" as="script">
+  <link rel="preload" href="config.js?v=4" as="script">
+  <link rel="preload" href="nav.js?v=11" as="script">
+  <link rel="preload" href="jam.js?v=6" as="script">
+  <link rel="preload" href="v5.js?v=12" as="script">
+  <script src="pre.js?v=8"></script>
+<link rel="stylesheet" href="discord-barra.css?v=1">
+</head>
+<body>
+
+<!-- Tela de carregamento: a barra segue as etapas reais (arquivos, identidade, conexão, conta, dados)
+     e só some quando a Astra está pronta. Números de usuários vêm do servidor (/estatisticas). -->
+<!-- data-scripts = quantos <script src> vêm DEPOIS do abertura.js no fim da página (a barra conta um por um) -->
+<div id="abertura" class="abertura carregando" role="status" aria-live="polite" aria-busy="true" data-scripts="22">
+  <div class="ab-fundo" aria-hidden="true"><img id="ab-fundo-img" src="astra-inicio.webp?v=2" alt="" decoding="async"></div>
+  <svg class="ab-luzes" aria-hidden="true" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="ab-fio" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".55" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+      </linearGradient>
+      <filter id="ab-brilho" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3.2"/></filter>
+    </defs>
+    <g class="ab-fios ab-fios-a">
+      <path d="M-40 330 C 180 240, 330 180, 520 -20" stroke="url(#ab-fio)" stroke-width="4" fill="none" filter="url(#ab-brilho)"/>
+      <path d="M-40 330 C 180 240, 330 180, 520 -20" stroke="url(#ab-fio)" stroke-width="1.4" fill="none"/>
+      <path d="M-80 420 C 160 330, 380 270, 660 60" stroke="url(#ab-fio)" stroke-width="2.2" fill="none" filter="url(#ab-brilho)" opacity=".7"/>
+      <path d="M-60 300 C 160 230, 300 170, 470 -30" stroke="url(#ab-fio)" stroke-width="1" fill="none"/>
+      <path d="M-30 380 C 220 300, 360 250, 600 40" stroke="url(#ab-fio)" stroke-width=".6" fill="none" opacity=".6"/>
+    </g>
+    <g class="ab-fios ab-fios-b">
+      <path d="M1640 640 C 1420 700, 1250 800, 1120 940" stroke="url(#ab-fio)" stroke-width="4" fill="none" filter="url(#ab-brilho)"/>
+      <path d="M1640 640 C 1420 700, 1250 800, 1120 940" stroke="url(#ab-fio)" stroke-width="1.4" fill="none"/>
+      <path d="M1680 560 C 1460 610, 1280 700, 1020 940" stroke="url(#ab-fio)" stroke-width="2.2" fill="none" filter="url(#ab-brilho)" opacity=".7"/>
+      <path d="M1650 670 C 1440 720, 1290 820, 1170 950" stroke="url(#ab-fio)" stroke-width="1" fill="none"/>
+      <path d="M1630 600 C 1400 650, 1230 760, 1060 930" stroke="url(#ab-fio)" stroke-width=".6" fill="none" opacity=".6"/>
+    </g>
+  </svg>
+  <div class="ab-centro">
+    <h1 class="ab-marca">
+      <svg class="ab-orbita" viewBox="0 0 640 260" aria-hidden="true">
+        <defs>
+          <linearGradient id="ab-orb" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#fff" stop-opacity=".15"/><stop offset=".8" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity=".9"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="320" cy="140" rx="300" ry="78" transform="rotate(-11 320 140)" fill="none" stroke="url(#ab-orb)" stroke-width="2"/>
+        <path class="ab-estrela" d="M574 34 L579 52 L597 57 L579 62 L574 80 L569 62 L551 57 L569 52 Z" fill="#fff"/>
+      </svg>
+      <span class="ab-nome">Astra</span>
+    </h1>
+    <p class="ab-autor"><i aria-hidden="true"></i><span>Desenvolvido por: <b>Art</b></span><i aria-hidden="true"></i></p>
+
+    <div class="ab-carga">
+      <div class="ab-carga-topo">
+        <span id="ab-etapa">Carregando Astra...</span>
+        <span id="ab-pct" class="ab-pct">0%</span>
+      </div>
+      <div class="ab-trilha" id="ab-barra" role="progressbar" aria-label="Carregando a Astra" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <i class="ab-enche" id="ab-enche"></i>
+      </div>
+      <span class="sr" id="ab-etapa-sr"></span>
+      <div class="ab-erro" id="ab-erro" hidden>
+        <span id="ab-erro-txt">Não consegui conectar ao servidor.</span>
+        <button type="button" id="ab-tentar">Tentar novamente</button>
+      </div>
+    </div>
+
+    <div class="ab-stats" id="ab-stats" aria-label="Estatísticas da Astra">
+      <span class="ab-stat">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <b id="ab-online" class="ab-num">&nbsp;</b><span id="ab-online-txt">usuários online</span>
+      </span>
+      <i class="ab-sep" aria-hidden="true"></i>
+      <span class="ab-stat">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="6" x2="6" y1="20" y2="16"/><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/></svg>
+        <b id="ab-total" class="ab-num">&nbsp;</b><span>usando o Astra</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div id="app" class="app">
+
+  <!-- Navegação lateral (ícones Lucide). Abre partes que já existem: Extras, música da sala e privado. -->
+  <nav id="trilho" class="trilho" aria-label="Navegação">
+    <!-- v5: o logo recolhe a barra inteira (só ícones) e expande de novo (com os nomes) -->
+    <button type="button" class="trilho-marca" id="trilho-marca" aria-expanded="true" data-rotulo="Expandir a barra">
+      <span class="trilho-logo-v5 trilho-logo-img" aria-hidden="true"><img src="astra-logo.png?v=1" alt="" width="40" height="40" decoding="async"></span>
+      <span class="trilho-marca-txt"><b class="trilho-nome">Astra</b><small class="trilho-versao" id="trilho-versao"></small></span>
+      <svg class="trilho-seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      <span class="sr">Recolher ou expandir a barra lateral</span>
+    </button>
+    <div class="trilho-itens" role="tablist">
+      <button type="button" class="trilho-bt ativo" data-ir="inicio" role="tab" aria-selected="true" aria-label="Início" data-rotulo="Início">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        <span>Início</span>
+      </button>
+      <button type="button" class="trilho-bt" data-ir="sala" role="tab" aria-selected="false" aria-label="Sala" data-rotulo="Voltar para a sala" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="m10 7 5 3-5 3Z"/></svg>
+        <span>Sala</span>
+      </button>
+      <button type="button" class="trilho-bt" data-ir="salas" role="tab" aria-selected="false" aria-label="Salas" data-rotulo="Salas">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+        <span>Salas</span>
+        <b class="trilho-qtd" id="trilho-salas-qtd" hidden></b>
+      </button>
+      <div class="trilho-grupo" id="trilho-grupo-jogos">
+        <button type="button" class="trilho-bt" data-ir="jogos" role="tab" aria-selected="false" aria-label="Jogos" data-rotulo="Jogos">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>
+          <span>Jogos</span>
+        </button>
+        <button type="button" class="trilho-abre" id="trilho-jogos-abre" aria-expanded="false" aria-controls="trilho-jogos" aria-label="Mostrar os jogos">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul class="trilho-sub" id="trilho-jogos" hidden></ul>
+      </div>
+      <button type="button" class="trilho-bt" data-ir="musica" role="tab" aria-selected="false" aria-label="Música" data-rotulo="Música">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        <span>Música</span>
+        <i class="trilho-ponto" id="trilho-musica-ponto" hidden></i>
+      </button>
+      <button type="button" class="trilho-bt" data-ir="mensagens" role="tab" aria-selected="false" aria-label="Mensagens" data-rotulo="Mensagens">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+        <span>Mensagens</span>
+        <b class="trilho-contador" id="trilho-pv" hidden></b>
+      </button>
+      <button type="button" class="trilho-bt" id="trilho-grupos" aria-pressed="false" aria-label="Grupos" data-rotulo="Grupos" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg>
+        <span>Grupos</span>
+        <b class="trilho-contador" id="trilho-gr" hidden></b>
+      </button>
+      <button type="button" class="trilho-bt" id="trilho-amigos" aria-pressed="false" aria-label="Amigos" data-rotulo="Amigos">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>Amigos</span>
+        <b class="trilho-contador" id="trilho-am" hidden></b>
+      </button>
+    </div>
+    <button type="button" class="trilho-bt trilho-tema" id="trilho-sugestao" aria-label="Sugestões e melhorias" data-rotulo="Sugestões" title="Mande uma sugestão ou melhoria para o Astra">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+      <span>Sugestões</span>
+    </button>
+    <!-- 2.7.20: desativar o áudio do app todo (telas, música, alertas e vozes), igual ao fone do Discord -->
+    <button type="button" class="trilho-bt trilho-tema trilho-surdo" id="trilho-surdo" aria-pressed="false" aria-label="Desativar áudio" data-rotulo="Desativar áudio" title="Desativar áudio (Ctrl+Shift+D)">
+      <svg class="ic-fone" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg>
+      <svg class="ic-fone-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 14h-1.343"/><path d="M9.128 3.47A9 9 0 0 1 21 12v3.343"/><path d="m2 2 20 20"/><path d="M20.414 20.414A2 2 0 0 1 19 21h-1a2 2 0 0 1-2-2v-3"/><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 2.636-6.364"/></svg>
+      <span>Áudio</span>
+    </button>
+    <button type="button" class="trilho-bt trilho-tema" id="trilho-tema" aria-label="Alternar tema claro ou escuro" data-rotulo="Tema">
+      <svg class="ic-sol" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      <svg class="ic-lua" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      <span>Tema</span>
+    </button>
+    <!-- Com a barra recolhida, o perfil e as configurações continuam aqui (sem abrir a coluna) -->
+    <div class="trilho-voce" id="trilho-voce">
+      <button type="button" class="trilho-bt" id="trilho-config" aria-label="Configurações" data-rotulo="Configurações">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span>Configurações</span>
+      </button>
+      <button type="button" class="trilho-eu" id="trilho-eu" aria-label="Meu perfil" data-rotulo="Meu perfil"></button>
+    </div>
+  </nav>
+
+  <!-- Coluna da esquerda: a sala (ou o início) e você -->
+  <aside class="lateral" id="lateral">
+    <header class="lateral-topo">
+      <img src="icone-192.png?v=2" alt="" class="logo">
+      <b>Astra</b>
+      <button id="bt-livre" class="bt-livre" type="button">livre</button>
+    </header>
+
+    <div id="info-sala" class="info-sala" hidden>
+      <div class="sala-titulo">
+        <b id="txt-nome-sala"></b>
+        <button type="button" id="bt-acesso" class="bt-acesso" hidden></button>
+      </div>
+      <h3 id="txt-contagem">Na sala</h3>
+      <ul id="lista-sala" class="lista"></ul>
+    </div>
+    <div id="info-inicio" class="info-inicio">
+      <h3 class="salas-titulo">Salas <span id="salas-qtd" class="salas-qtd"></span></h3>
+      <ul id="lista-salas" class="lista-salas"></ul>
+    </div>
+    <!-- Recado do Astra: parte própria, separada das salas (aparece no início e dentro da sala) -->
+    <div id="recado-astra" class="recado-astra" hidden>
+      <div class="recado-topo"><img src="icone-192.png" alt="" class="recado-logo"><b>Recado do Astra</b><small id="recado-hora"></small></div>
+      <p id="recado-texto"></p>
+    </div>
+
+    <section id="painel-desempenho" class="painel-desempenho" hidden>
+      <button id="bt-desempenho" class="desempenho-topo" type="button" aria-expanded="true" title="Mostrar ou esconder os números">
+        <span class="des-ao-vivo" aria-hidden="true"></span><b>Desempenho</b><span id="desempenho-resumo" class="sub"></span>
+        <svg class="des-seta" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div id="desempenho-corpo" class="desempenho-corpo">
+        <div class="des-trocar" role="tablist" aria-label="O que medir">
+          <button type="button" class="des-op" data-ver="astra" role="tab">Astra</button>
+          <button type="button" class="des-op" data-ver="pc" role="tab">PC inteiro</button>
+        </div>
+        <div class="des-aneis">
+          <div class="des-anel" id="des-anel-1"><svg viewBox="0 0 36 36"><circle class="fundo" cx="18" cy="18" r="15.5"/><circle class="valor" cx="18" cy="18" r="15.5" pathLength="100"/></svg><b>–</b><small>CPU</small></div>
+          <div class="des-anel" id="des-anel-2"><svg viewBox="0 0 36 36"><circle class="fundo" cx="18" cy="18" r="15.5"/><circle class="valor" cx="18" cy="18" r="15.5" pathLength="100"/></svg><b>–</b><small>RAM</small></div>
+          <div class="des-anel" id="des-anel-3"><svg viewBox="0 0 36 36"><circle class="fundo" cx="18" cy="18" r="15.5"/><circle class="valor" cx="18" cy="18" r="15.5" pathLength="100"/></svg><b>–</b><small>GPU</small></div>
+        </div>
+        <div class="des-linha"><span>CPU</span><svg class="des-grafico" id="des-graf-cpu" viewBox="0 0 100 20" preserveAspectRatio="none"><path class="area"/><path class="linha"/></svg><b id="des-graf-cpu-n">–</b></div>
+        <div class="des-linha"><span>GPU</span><svg class="des-grafico" id="des-graf-gpu" viewBox="0 0 100 20" preserveAspectRatio="none"><path class="area"/><path class="linha"/></svg><b id="des-graf-gpu-n">–</b></div>
+      </div>
+    </section>
+
+    <div id="conexao-sala" class="conexao-sala" hidden>
+      <span id="bt-conexao" class="conexao-sinal" tabindex="0" aria-label="Atraso da tela">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="3" y="15" width="4" height="6" rx="1"/><rect x="10" y="10" width="4" height="11" rx="1"/><rect x="17" y="4" width="4" height="17" rx="1"/></svg>
+        <span id="dica-ms" class="dica-ms">… ms</span>
+      </span>
+      <div class="conexao-txt"><b id="txt-conexao">Conectado</b><small id="txt-conexao-sala"></small></div>
+      <svg class="conexao-seta" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <footer class="painel-usuario">
+      <button id="meu-avatar" class="avatar bt-foto" type="button" title="Meu perfil" aria-label="Meu perfil"></button>
+      <button id="bt-meu-nome" class="usuario-info" title="Mudar o nome que os amigos veem">
+        <b id="txt-meu-nome"></b>
+        <span id="txt-meu-status" class="sub status-trocar" title="Mudar o status">Online</span>
+      </button>
+      <div id="menu-status" class="menu-status" hidden></div>
+      <button id="bt-relato" hidden class="bt-icone bt-relato" type="button" title="Fale com o dono (ideias e problemas)" aria-label="Fale com o dono: ideias e problemas">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M5 3h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-4 4v-4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm0 2v10h2v1.2L8.2 15H19V5H5Zm6 1.5h2v5h-2v-5Zm0 6h2v2h-2v-2Z"/></svg>
+      </button>
+      <button id="bt-tema" hidden class="bt-icone bt-relato bt-tema" type="button" title="Tema: Escuro ou All black" aria-label="Escolher o tema">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.4A4.6 4.6 0 0 0 22 9.8C22 6 17.5 3 12 3Zm-5.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm3-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm3 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"/></svg>
+      </button>
+      <button id="bt-extras" hidden class="bt-icone bt-relato bt-extras" type="button" title="Extras e minigames (MyWaifu)" aria-label="Extras e minigames">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M7 3h7a2 2 0 0 1 2 2v1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2v-1H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm3 5v11h7V8h-7Zm-3-3v11h1V8a2 2 0 0 1 2-2h4V5H7Zm6.5 5.3c.6-.9 2-.6 1.9.5 0 .8-1.1 1.5-1.9 2-.8-.5-1.8-1.2-1.9-2 0-1.1 1.3-1.4 1.9-.5Z"/></svg>
+      </button>
+      <button id="bt-privado" class="bt-icone bt-privado bt-pv-rodape" type="button" title="Mensagens privadas (criptografadas)" aria-label="Mensagens privadas">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M3 4h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H8l-4 3.5V15a2 2 0 0 1-1-1.7V6a2 2 0 0 1 2-2Zm16 4h1a2 2 0 0 1 2 2v7.3a2 2 0 0 1-1 1.7V22l-4-3.5h-6a2 2 0 0 1-1.7-1H15a4 4 0 0 0 4-4V8Z"/></svg>
+        <span id="pv-contador" class="pv-contador" hidden></span>
+      </button>
+      <button id="bt-config" class="bt-config" type="button" title="Configurações" aria-label="Configurações">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3h-4l-.4 2.7a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.5 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1c.5.4 1.1.7 1.7 1L11 21h4l.4-2.7c.6-.3 1.2-.6 1.7-1l2.5 1 2-3.5L19.4 13ZM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" transform="translate(-1 0)"/></svg>
+        <span id="config-contador" class="pv-contador" hidden></span>
+      </button>
+    </footer>
+  </aside>
+
+  <!-- Centro -->
+  <main class="principal">
+    <header class="barra-topo">
+      <!-- v5.2: uma seta só recolhe/mostra a coluna da sala (membros, conexão) -->
+      <button type="button" class="bt-coluna-seta" id="trilho-coluna" aria-pressed="false" aria-label="Esconder a coluna da sala" title="Esconder a coluna da sala" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </button>
+      <span id="ponto-conexao" class="ponto"></span>
+      <b id="txt-titulo">Início</b>
+      <button id="bt-correio" class="bt-correio" type="button" title="Caixa de correio" aria-label="Caixa de correio" hidden>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.4l8 5 8-5V7H4Zm16 2.8-7.5 4.7a1 1 0 0 1-1 0L4 9.8V17h16V9.8Z"/></svg>
+        <span id="correio-ponto" class="correio-ponto" hidden></span>
+      </button>
+      <div id="correio-caixa" class="correio-caixa" hidden>
+        <span class="correio-rotulo">Caixa de correio</span>
+        <div id="cx-lista" class="cx-lista"></div>
+        <div id="cx-sep" class="cx-sep" hidden></div>
+        <div id="cx-pergunta" class="cx-item cx-pergunta fechada" hidden>
+          <button type="button" id="cx-pergunta-abre" class="cx-tit"><span><span id="cx-pergunta-titulo">Pergunta do larpinho</span><span class="cx-tag">responder</span></span><small id="correio-de" class="correio-de"></small></button>
+          <div class="cx-corpo">
+            <p id="correio-pergunta" class="correio-pergunta"></p>
+            <textarea id="correio-texto" maxlength="500" rows="3" placeholder="Sua resposta (só o dono do Astra lê)"></textarea>
+            <div class="correio-pe"><small id="correio-msg"></small><button id="correio-enviar" class="bt primario pequeno" type="button">Responder</button></div>
+          </div>
+        </div>
+      </div>
+      <a id="bt-discord-com" class="bt-discord-com" href="https://discord.gg/uEqNat9G7X" target="_blank" rel="noopener" title="Entrar no servidor do Astra no Discord" aria-label="Servidor do Astra no Discord">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.3 5.3A16.6 16.6 0 0 0 15.2 4l-.5 1a15.4 15.4 0 0 0-5.4 0L8.8 4a16.5 16.5 0 0 0-4.1 1.3C2.1 9.2 1.4 13 1.8 16.7a16.7 16.7 0 0 0 5 2.5l1.1-1.7a10.8 10.8 0 0 1-1.7-.8l.4-.3a11.9 11.9 0 0 0 10.8 0l.4.3c-.5.3-1.1.6-1.7.8l1.1 1.7a16.6 16.6 0 0 0 5-2.5c.5-4.3-.7-8.1-2.9-11.4ZM8.7 14.4c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg>
+        <span>Comunidade</span>
+      </a>
+      <span id="bt-carteira" class="bt-carteira" tabindex="0" hidden>
+        <img src="astradoll.svg" alt="" width="16" height="16">
+        <span id="carteira-saldo">0</span>
+        <span class="carteira-dica" role="tooltip">Minha carteira<b id="carteira-grande">0 AstraDoll</b><span id="carteira-missoes" class="carteira-missoes" hidden></span></span>
+      </span>
+      <button id="bt-baixar" class="bt pequeno bt-baixar" type="button" title="Baixar a versão mais nova do AstraScreenShare">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.2l3.3-3.3 1.4 1.4L12 16l-5.7-5.7 1.4-1.4 3.3 3.3V3ZM4 18h16v2H4v-2Z"/></svg>
+        <span id="txt-baixar">Baixar</span>
+      </button>
+      <button id="bt-lado" class="bt-icone bt-lado" type="button" hidden title="Esconder chat e música" aria-label="Esconder chat e música">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2v12h9V6H5Zm11 0v12h3V6h-3Z"/></svg>
+        <span id="lado-novas" class="lado-novas" hidden></span>
+      </button>
+      <button id="bt-sair" class="bt pequeno perigo" hidden>Sair da sala</button>
+    </header>
+
+    <!-- Início (v5): faixa com a Astra, salas ativas e a comunidade. Criar sala abre uma janelinha. -->
+    <section id="inicio" class="inicio inicio-v5">
+      <div class="v5-hero">
+        <img class="v5-hero-foto" src="astra-banner-foto.webp?v=2" alt="" aria-hidden="true" decoding="async" fetchpriority="high">
+        <svg class="v5-folhas" viewBox="0 0 600 400" aria-hidden="true"><defs><path id="v5-folha" d="M0 0C14-13 40-15 58 0 40 15 14 13 0 0Z"/></defs><g fill="#f4f4f5"><g transform="translate(40 60) rotate(-28)"><use class="f1" href="#v5-folha"/></g><g transform="translate(530 230) rotate(-38) scale(.85)"><use class="f2" href="#v5-folha"/></g><g transform="translate(330 330) rotate(-12) scale(.5)"><use class="f3" href="#v5-folha"/></g></g></svg>
+        <div class="v5-hero-txt">
+          <span class="v5-ola" id="iv-ola">Olá!</span>
+          <h1 class="v5-titulo">Bem-vindo à Astra</h1>
+          <p class="v5-sub">Crie sua sala, chame a galera e transmita sua tela em segundos.</p>
+          <div class="v5-selos">
+            <span class="v5-selo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>1080p 60 grátis</span>
+            <span class="v5-selo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Assista sem instalar</span>
+            <span class="v5-selo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>Sem anúncio</span>
+            <span class="v5-selo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>IP escondido nas salas públicas</span>
+          </div>
+          <div class="v5-acoes">
+            <button type="button" class="v5-bt v5-bt-claro" id="v5-criar">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Criar sala</button>
+            <button type="button" class="v5-bt v5-bt-vidro" id="v5-explorar">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/></svg>Explorar salas</button>
+          </div>
+          <div class="v5-hero-info" aria-live="polite" hidden>
+            <span><i class="v5-ponto"></i><b id="v5-info-online">–</b> online agora</span>
+            <span><b id="v5-info-salas">0</b> <span id="v5-info-salas-txt">salas abertas</span></span>
+          </div>
+        </div>
+      </div>
+
+      <section class="v5-bloco" aria-labelledby="v5-salas-titulo">
+        <header class="v5-bloco-cab">
+          <h2 id="v5-salas-titulo">Salas ativas</h2>
+          <button type="button" class="v5-ver" id="v5-ver-todas">Ver todas<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+        </header>
+        <ul class="v5-cards" id="v5-salas-ativas" aria-live="polite"></ul>
+      </section>
+
+
+      <div id="v5-recado-casa"></div>
+      <p id="msg-inicio" class="msg" role="alert"></p>
+    </section>
+
+    <!-- Salas: todas as salas abertas, em cards (v5) -->
+    <section id="pg-salas" class="pagina" hidden aria-labelledby="pg-salas-titulo">
+      <header class="pagina-cab">
+        <div><h1 id="pg-salas-titulo">Salas</h1><p class="sub" id="pg-salas-sub">Salas abertas agora. Clique para entrar.</p></div>
+        <button type="button" class="v5-bt v5-bt-claro v5-bt-p" id="v5-criar-2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Criar sala</button>
+      </header>
+      <ul class="v5-cards v5-cards-todas" id="v5-salas-todas"></ul>
+    </section>
+
+    <!-- Sala -->
+    <section id="sala" class="sala" hidden>
+      <div id="escondidas" class="escondidas" hidden></div>
+      <div id="palco" class="palco">
+        <div id="vazio" class="vazio">
+          <svg viewBox="0 0 24 24" width="56" height="56" aria-hidden="true"><path fill="currentColor" d="M21 3H3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h7v2H8v2h8v-2h-2v-2h7a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm0 13H3V5h18v11Z"/></svg>
+          <p><b>Ninguém está transmitindo</b></p>
+          <p class="sub">Quando alguém da sala entrar ao vivo, a tela aparece aqui.</p>
+        </div>
+      </div>
+      <div id="faixa-relaxado" class="faixa-relaxado" hidden>
+        <img src="relaxado.webp" alt="">
+        <span>Modo relaxado: quem transmite sabe que você está curtindo de longe.</span>
+        <button id="bt-sair-relaxado" class="bt pequeno">Voltar</button>
+      </div>
+      <div class="doca">
+        <select id="sel-qualidade" class="sel" title="Qualidade" hidden>
+          <option value="720-30">720p · 30 qps</option>
+          <option value="1080-30">1080p · 30 qps</option>
+          <option value="1080-60" selected>1080p · 60 qps</option>
+          <option value="orig-60">Original · 60 qps</option>
+          <option value="4k-60">4K · 60 qps (upload bom)</option>
+        </select>
+        <button id="bt-tela" class="bt transmitir">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21 3H3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h7v2H8v2h8v-2h-2v-2h7a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm0 13H3V5h18v11Z"/></svg>
+          <span>Transmitir tela</span>
+        </button>
+        <button id="bt-camera" class="bt pausa" type="button" title="Mostra a sua câmera para a sala (junto com a tela ou sozinha)">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4Z"/></svg>
+          <span>Câmera</span>
+        </button>
+        <button id="bt-pausa" class="bt pausa" type="button" hidden>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+          <span>Pausar</span>
+        </button>
+        <button id="bt-link" class="bt pausa" type="button" hidden title="Copia um link: quem abrir só digita um nome e assiste a sua tela">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M10.6 13.4a1 1 0 0 1 0-1.4l3.5-3.5a1 1 0 1 1 1.4 1.4L12 13.4a1 1 0 0 1-1.4 0Zm-2.1 6.2a4.5 4.5 0 0 1-3.2-7.7l2.1-2.1 1.4 1.4-2.1 2.1a2.5 2.5 0 1 0 3.5 3.5l2.1-2.1 1.4 1.4-2.1 2.1a4.5 4.5 0 0 1-3.1 1.4Zm8.3-5.5-1.4-1.4 2.1-2.1a2.5 2.5 0 1 0-3.5-3.5L11.9 9.2l-1.4-1.4 2.1-2.1a4.5 4.5 0 1 1 6.4 6.4l-2.2 2Z"/></svg>
+          <span>Copiar link</span>
+        </button>
+        <button id="bt-acorde" class="bt acorde" hidden title="Chama quem está assistindo para ver uma jogada agora">
+          <img src="acorde.png" alt="">
+          <span>Acorde!</span>
+        </button>
+        <button id="bt-relaxado" class="bt relaxado" title="Avisa quem transmite que você está assistindo deitado ou de longe">
+          <img src="relaxado.webp" alt="">
+          <span>Assista relaxado</span>
+        </button>
+        <button id="bt-parar-assistir" class="bt parar-assistir" type="button" hidden title="Esconde as telas e o som delas, sem sair da sala">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M2.1 3.5 3.5 2.1l18.4 18.4-1.4 1.4-3.3-3.3A10.9 10.9 0 0 1 12 20C6.5 20 2.3 16.3 1 12c.6-1.9 1.8-3.7 3.4-5.2L2.1 3.5Zm6 6A4 4 0 0 0 13.5 15L12 13.4a1.5 1.5 0 0 1-1.4-1.4L8.1 9.5ZM12 4c5.5 0 9.7 3.7 11 8a11 11 0 0 1-2.9 4.6l-2.8-2.8A6 6 0 0 0 10.2 6.7L8.4 4.6A11 11 0 0 1 12 4Z"/></svg>
+          <span id="txt-parar-assistir">Parar de assistir</span>
+        </button>
+        <p id="aviso-celular" class="aviso" hidden>Este navegador não deixa compartilhar a tela. Aqui dá para assistir; para transmitir, use o programa no PC ou o app Android.</p>
+      </div>
+    </section>
+    <!-- Jogos: os minigames que já existem (Extras), com instalar/abrir -->
+    <section id="pg-jogos" class="pagina" hidden aria-labelledby="pg-jogos-titulo">
+      <header class="pagina-cab">
+        <div><h1 id="pg-jogos-titulo">Jogos</h1><p class="sub">Minigames opcionais da Astra. Ganhos em AstraDoll, na sua carteira.</p></div>
+      </header>
+      <p id="jogos-estado" class="pagina-estado" role="status"></p>
+      <ul id="jogos-lista" class="jogos-lista"></ul>
+    </section>
+
+    <!-- Música: ouvir sozinho, Jams (com ou sem sala) e a música da sala. O player é o mesmo da sala (jam.js). -->
+    <section id="pg-musica" class="pagina pagina-musica" hidden aria-labelledby="pg-musica-titulo">
+      <header class="pagina-cab">
+        <div><h1 id="pg-musica-titulo">Música</h1><p class="sub" id="pg-musica-sub">Ouça sozinho ou numa Jam com os amigos, sem precisar de sala.</p></div>
+      </header>
+      <div class="musica-grade">
+        <div class="musica-col-jam">
+          <!-- fora de uma Jam -->
+          <div id="jam-fora" class="jam-fora">
+            <div class="cartao jam-comecar">
+              <b>Começar</b>
+              <div class="jam-opcoes">
+                <button type="button" class="jam-opcao" id="jam-sozinho">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg>
+                  <span><b>Ouvir sozinho</b><small>Só você escuta. Dá para chamar alguém depois.</small></span>
+                </button>
+                <button type="button" class="jam-opcao" id="jam-nova-bt" aria-expanded="false" aria-controls="form-jam">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  <span><b>Criar uma Jam</b><small>Todo mundo ouve a mesma música, no mesmo tempo.</small></span>
+                </button>
+              </div>
+              <form id="form-jam" class="form-jam" hidden>
+                <input id="in-jam-nome" maxlength="40" placeholder="Nome da Jam (ex.: Lo-fi pra estudar)" autocomplete="off" aria-label="Nome da Jam">
+                <div class="privacidade privacidade-2" role="radiogroup" aria-label="Quem vê a Jam">
+                  <button type="button" role="radio" data-jam-acesso="publica" aria-checked="true">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>Pública</button>
+                  <button type="button" role="radio" data-jam-acesso="privada" aria-checked="false">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Só com link</button>
+                </div>
+                <button type="submit" class="bt primario">Criar Jam</button>
+              </form>
+              <form id="form-jam-link" class="jam-link">
+                <input id="in-jam-link" placeholder="Recebeu um convite? Cole o link aqui" autocomplete="off" aria-label="Link de convite da Jam">
+                <button type="submit" class="bt secundario pequeno">Entrar</button>
+              </form>
+            </div>
+            <div class="cartao jam-abertas">
+              <div class="jam-abertas-cab"><b>Jams abertas</b><small id="jam-qtd"></small></div>
+              <ul id="jam-lista" class="jam-lista"></ul>
+            </div>
+          </div>
+          <!-- dentro de uma Jam -->
+          <div id="jam-dentro" class="cartao jam-dentro" hidden>
+            <div class="jam-cab">
+              <div class="jam-cab-txt">
+                <span class="jam-selo" id="jam-selo"></span>
+                <b id="jam-nome"></b>
+                <small id="jam-quem"></small>
+              </div>
+              <button type="button" class="bt secundario pequeno" id="jam-convidar">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Convidar</button>
+            </div>
+            <ul id="jam-membros" class="jam-membros" aria-label="Quem está na Jam"></ul>
+            <div id="jam-dono-opcoes" class="jam-dono-opcoes" hidden>
+              <label class="jam-troca"><input type="checkbox" id="jam-publica"><span>Aparecer na lista de Jams abertas</span></label>
+              <label class="jam-troca"><input type="checkbox" id="jam-so-dono"><span>Só eu controlo a música</span></label>
+              <button type="button" class="link-discreto" id="jam-novo-link">Gerar um link novo (o antigo para de valer)</button>
+            </div>
+            <button type="button" class="bt secundario jam-sair" id="jam-sair">Sair da Jam</button>
+          </div>
+          <p id="jam-msg" class="pagina-estado" role="status"></p>
+        </div>
+        <!-- o painel de música (o mesmo da sala) vem para cá enquanto a página está aberta -->
+        <div class="musica-col-player" id="pg-musica-player">
+          <div id="musica-sem-fonte" class="cartao pagina-vazia musica-sem-fonte">
+            <span class="pagina-vazia-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+            <b>Nada tocando ainda</b>
+            <p class="sub">Escolha ouvir sozinho, crie uma Jam ou entre numa. Funciona com YouTube, Spotify e SoundCloud.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Coluna da direita: chat da sala e quem está online -->
+  <aside class="online">
+    <div id="abas-direita" class="abas-direita" hidden>
+      <button class="aba-d ativa" data-aba="chat" type="button">Chat <span id="chat-novas" class="contador" hidden></span></button>
+      <button class="aba-d" data-aba="musica" type="button">Música <span id="musica-nota" class="nota" hidden>♪</span></button>
+      <button class="aba-d" data-aba="online" type="button">Online</button>
+    </div>
+    <section id="painel-chat" class="painel-chat" hidden>
+      <div class="chat-topo">
+        <h3>Chat da sala</h3>
+        <div class="chat-topo-bts">
+          <button id="bt-campainha" class="bt-icone" type="button" aria-pressed="true"></button>
+          <button id="bt-popup" class="bt-icone" type="button" aria-pressed="true"></button>
+          <button id="bt-cl-sala" class="bt-cl-sala" type="button" title="Dar CL: apaga o chat da sala para todo mundo">CL</button>
+        </div>
+      </div>
+      <ul id="chat-lista" class="chat-lista" aria-live="polite"></ul>
+      <div id="painel-gif" class="painel-gif" hidden>
+        <div class="gif-abas" role="tablist">
+          <button id="gif-aba-fav" type="button" role="tab">&#9733; Favoritos</button>
+          <button id="gif-aba-busca" type="button" role="tab">Procurar</button>
+        </div>
+        <input id="in-gif" maxlength="60" placeholder="Procurar GIFs" autocomplete="off">
+        <p id="gif-msg" class="sub"></p>
+        <div id="lista-gif" class="lista-gif"></div>
+        <button id="gif-mais" class="bt pequeno" type="button" hidden>Mais</button>
+      </div>
+      <ul id="lista-mencoes" class="lista-mencoes" role="listbox" hidden></ul>
+      <form id="form-chat" class="form-chat">
+        <button id="bt-imagem" class="bt-icone" type="button" title="Mandar imagem (ou cole com Ctrl+V)" aria-label="Mandar imagem">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm0 16H5V5h14v14Zm-5.1-6.8-2.7 3.5-1.9-2.3L6.5 17h11l-3.6-4.8ZM8.5 10A1.5 1.5 0 1 0 8.5 7a1.5 1.5 0 0 0 0 3Z"/></svg>
+        </button>
+        <input id="in-arquivo-imagem" type="file" accept="image/*" hidden>
+        <button id="bt-gif" class="bt-icone bt-gif" type="button" title="GIFs" aria-label="GIFs">GIF</button>
+        <input id="in-chat" maxlength="500" placeholder="Mensagem" autocomplete="off" enterkeyhint="send">
+        <button class="bt-icone" type="submit" title="Enviar" aria-label="Enviar">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M3.4 20.4 21 12 3.4 3.6 3 10l12 2-12 2z"/></svg>
+        </button>
+      </form>
+    </section>
+    <section id="painel-musica" class="painel-musica" hidden>
+      <h3 id="musica-h3">Música da sala</h3>
+      <div class="musica-cartao">
+        <p id="musica-vazia" class="musica-vazia">Nenhuma música tocando.<br>Coloque uma aqui embaixo: todo mundo da sala ouve junto.</p>
+        <!-- Capa no estilo Spotify. O player (YouTube ou SoundCloud) fica escondido atrás dela: só o som. -->
+        <div id="musica-player" class="musica-player" hidden>
+          <img id="musica-capa" class="musica-capa" alt="" hidden>
+          <span id="musica-capa-vazia" class="musica-capa-vazia" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="56" height="56"><path fill="currentColor" d="M9 18.5a2.5 2.5 0 1 1-2-2.45V6l11-2v10.5a2.5 2.5 0 1 1-2-2.45V7.1l-7 1.27v10.13Z"/></svg>
+          </span>
+          <button id="musica-ouvir" class="musica-ouvir" type="button" hidden>Clique para ouvir</button>
+        </div>
+        <div id="musica-agora" class="musica-agora" hidden>
+          <span class="musica-rotulo"><span id="musica-eq" class="musica-eq" aria-hidden="true"><i></i><i></i><i></i></span><span id="musica-estado">Tocando agora</span></span>
+          <b id="musica-titulo"></b>
+          <span id="musica-info" class="sub"></span>
+          <div id="musica-progresso" class="musica-progresso" hidden>
+            <span id="musica-tempo">0:00</span>
+            <span class="musica-trilha"><span id="musica-andou"></span></span>
+            <span id="musica-duracao">0:00</span>
+          </div>
+          <div class="musica-controles">
+            <button id="musica-pausar" class="musica-tocar" type="button" title="Pausar para todos"></button>
+            <button id="musica-video" class="bt-icone" type="button" title="Ver o vídeo (só para você; todo mundo vê no mesmo tempo)" aria-pressed="false">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v9a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 15.5v-9Zm7 1.8v5.4l4.6-2.7L10 8.3ZM7 20h10v1.5H7z"/></svg>
+            </button>
+            <button id="musica-pular" class="bt-icone" type="button" title="Pular para a próxima">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M5 5.5v13l9.5-6.5L5 5.5ZM16 5h2.5v14H16z"/></svg>
+            </button>
+            <span class="musica-som">
+              <button id="musica-mudo" class="bt-icone" type="button" title="Silenciar só para você"></button>
+              <input id="musica-volume" class="musica-volume" type="range" min="0" max="100" step="1" value="80" title="Volume (só para você)" aria-label="Volume">
+              <span id="musica-volume-num" class="musica-volume-num">80</span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <form id="form-musica" class="form-chat">
+        <input id="in-musica" maxlength="120" placeholder="Nome, link ou playlist" autocomplete="off" enterkeyhint="search">
+        <button class="bt-icone" type="submit" title="Procurar" aria-label="Procurar">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M10 3a7 7 0 0 1 5.6 11.2l5.1 5.1-1.4 1.4-5.1-5.1A7 7 0 1 1 10 3Zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/></svg>
+        </button>
+      </form>
+      <p id="musica-aceita" class="musica-aceita">
+        <span id="musica-logo-yt" class="musica-logo yt" title="Links e playlists do YouTube">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect class="fundo" x="1.5" y="5" width="21" height="14" rx="4.5"/><path class="desenho" d="M10 9.2v5.6l4.8-2.8z"/></svg>YouTube</span>
+        <span id="musica-logo-sp" class="musica-logo sp" title="Músicas, playlists e álbuns do Spotify (tocam pelo SoundCloud ou pelo YouTube)">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle class="fundo" cx="12" cy="12" r="10.5"/><path class="desenho" fill="none" stroke-linecap="round" d="M6.6 9.3c3.7-1.1 7.6-.8 10.9 1M7.3 12.4c3-.8 6-.5 8.6.9M7.9 15.3c2.3-.6 4.6-.4 6.6.7"/></svg>Spotify</span>
+        <span id="musica-logo-sc" class="musica-logo sc" title="Músicas e playlists do SoundCloud">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path class="fundo" d="M10 17.5h9.2a3.3 3.3 0 0 0 .2-6.6 5.2 5.2 0 0 0-9.4-2.6Z"/><path class="fundo" d="M7.6 17.5V9.6h1.3v7.9Zm-2.3 0v-6h1.3v6Zm-2.3 0v-4.2h1.3v4.2Z"/></svg>SoundCloud</span>
+      </p>
+      <div id="musica-jam" class="musica-jam">
+        <b>Ouvir junto, sem Premium</b>
+        <ul>
+          <li>Não precisa de Spotify Premium.</li>
+          <li>Cole o nome, o link ou a playlist: todo mundo ouve no mesmo tempo.</li>
+        </ul>
+        <small><span class="beta">BETA</span> Podem acontecer bugs, ainda estamos em beta. Obrigado pela paciência!</small>
+      </div>
+      <p id="musica-msg" class="sub" role="status"></p>
+      <ul id="musica-resultados" class="musica-lista"></ul>
+      <div id="musica-fila-titulo" class="fila-cab" hidden>
+        <h3>Próximas <i id="musica-fila-n" class="fila-n"></i></h3>
+        <div id="musica-limpar" class="fila-limpar">
+          <button type="button" class="fl-abre" title="Limpar fila" aria-label="Limpar fila"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V5h6v2M7 7l1 12h8l1-12M10 11v5M14 11v5"/></svg><span class="fl-txt">Limpar fila</span><span class="fl-perg">Limpar a fila toda?</span></button>
+          <button type="button" class="fl-sim" title="Sim, limpar" aria-label="Sim, limpar a fila toda">✓</button>
+          <button type="button" class="fl-nao" title="Não" aria-label="Não limpar">✕</button>
+        </div>
+      </div>
+      <ul id="musica-fila" class="musica-lista"></ul>
+    </section>
+    <section id="painel-online" class="painel-online">
+      <h3 id="txt-online">Online</h3>
+      <input id="in-busca" class="busca" placeholder="Procurar pelo nome" autocomplete="off">
+      <ul id="lista-online" class="lista"></ul>
+    </section>
+  </aside>
+</div>
+
+<!-- Papel de parede: fica atrás de tudo (só quem colocou vê) -->
+<div id="papel-fundo" class="papel-fundo" hidden><img alt=""></div>
+
+<!-- Ajustar o papel de parede: muda ao vivo, sem tampar o programa -->
+<section id="papel-editor" class="papel-editor" hidden aria-label="Ajustar papel de parede">
+  <header><b>Ajustar papel de parede</b><small>Arraste a foto para mudar o lugar. Use a rodinha do mouse para aproximar.</small></header>
+  <div id="papel-previa" class="papel-previa"><div class="papel-fundo"><img alt=""></div><div class="pp-app"><i></i><i></i><i></i></div></div>
+  <label>Zoom <input id="pp-zoom" type="range" min="100" max="300" value="100"></label>
+  <label>Desfoque <input id="pp-blur" type="range" min="0" max="20" value="0"></label>
+  <label>Brilho <input id="pp-brilho" type="range" min="20" max="120" value="70"></label>
+  <label>Painéis <input id="pp-painel" type="range" min="0" max="100" value="75"><span class="pp-dica">transparente ↔ sólido</span></label>
+  <div class="papel-editor-rodape">
+    <button id="pp-trocar" class="bt secundario pequeno" type="button">Trocar foto</button>
+    <button id="pp-cancelar" class="bt secundario pequeno" type="button">Cancelar</button>
+    <button id="pp-salvar" class="bt primario pequeno" type="button">Salvar</button>
+  </div>
+</section>
+
+<!-- Chat privado (criptografado de ponta a ponta) -->
+<section id="grupos" class="grupos" hidden aria-label="Grupos"></section>
+<section id="amigos" class="grupos amigos" hidden aria-label="Amigos"></section>
+<section id="privado" class="privado" hidden aria-label="Mensagens privadas">
+  <header id="pv-topo" class="pv-topo"></header>
+  <div id="pv-corpo" class="pv-corpo"></div>
+  <form id="pv-form" class="pv-rodape" hidden>
+    <textarea id="pv-texto" rows="1" maxlength="2000" placeholder="Mensagem privada" autocomplete="off"></textarea>
+    <button class="pv-enviar" type="submit" title="Enviar" aria-label="Enviar"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M3 20.5V14l9-2-9-2V3.5L22 12 3 20.5Z"/></svg></button>
+  </form>
+</section>
+
+<!-- Escolher o nome (só na primeira vez) -->
+<!-- Configurações: tudo que ficava no rodapé, numa tela só (menu na esquerda, conteúdo na direita) -->
+<div id="modal-config" class="modal config" hidden>
+  <div class="config-caixa" role="dialog" aria-labelledby="config-titulo">
+    <nav class="config-menu" aria-label="Seções">
+      <button id="cfg-eu" class="config-eu" type="button" data-sec="conta">
+        <span id="cfg-avatar" class="avatar"></span>
+        <span><b id="cfg-nome"></b><small>Editar perfil <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="m4 17.2 10.6-10.6 3 3L7 20.2H4v-3Zm12-12 1.4-1.4a1 1 0 0 1 1.4 0l1.6 1.6a1 1 0 0 1 0 1.4L19 8.2l-3-3Z"/></svg></small></span>
+      </button>
+      <p class="config-grupo">Conta</p>
+      <button class="config-item" type="button" data-sec="conta"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2c-4.4 0-8 2.2-8 5v2h16v-2c0-2.8-3.6-5-8-5Z"/></svg>Minha conta</button>
+      <button class="config-item" type="button" data-sec="privado"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 4h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H8l-4 3.5V15a2 2 0 0 1-1-1.7V6a2 2 0 0 1 2-2Zm16 4h1a2 2 0 0 1 2 2v7.3a2 2 0 0 1-1 1.7V22l-4-3.5h-6a2 2 0 0 1-1.7-1H15a4 4 0 0 0 4-4V8Z"/></svg>Mensagens privadas<span id="cfg-pv-contador" class="pv-contador" hidden></span></button>
+      <p class="config-grupo">App</p>
+      <button class="config-item" type="button" data-sec="aparencia"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.4A4.6 4.6 0 0 0 22 9.8C22 6 17.5 3 12 3Zm-5.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm3-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm3 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"/></svg>Aparência</button>
+      <button class="config-item" type="button" data-sec="avisos"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22Zm7-6V11a7 7 0 0 0-5.5-6.84V3a1.5 1.5 0 0 0-3 0v1.16A7 7 0 0 0 5 11v5l-2 2v1h18v-1l-2-2Z"/></svg>Notificações</button>
+      <button class="config-item" type="button" data-sec="voz"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2Z"/></svg>Voz e áudio</button>
+      <button class="config-item" type="button" data-sec="teclas"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Zm1 3v2h2V9H5Zm3 0v2h2V9H8Zm3 0v2h2V9h-2Zm3 0v2h2V9h-2Zm3 0v2h2V9h-2ZM7 13v2h10v-2H7Z"/></svg>Teclas</button>
+      <button class="config-item" type="button" data-sec="extras"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 3h7a2 2 0 0 1 2 2v1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2v-1H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm3 5v11h7V8h-7Z"/></svg>Extras e minigames</button>
+      <button class="config-item" type="button" data-sec="idioma"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.9 6h-2.9a15.7 15.7 0 0 0-1.4-3.6A8 8 0 0 1 18.9 8ZM12 4c.8 1.2 1.5 2.5 1.9 4h-3.8c.4-1.5 1.1-2.8 1.9-4ZM4.3 14a8.2 8.2 0 0 1 0-4h3.4a16.5 16.5 0 0 0 0 4H4.3Zm.8 2h2.9c.3 1.3.8 2.5 1.4 3.6A8 8 0 0 1 5.1 16ZM8 8H5.1a8 8 0 0 1 4.3-3.6C8.8 5.5 8.3 6.7 8 8Zm4 12c-.8-1.2-1.5-2.5-1.9-4h3.8c-.4 1.5-1.1 2.8-1.9 4Zm2.3-6H9.7a14.7 14.7 0 0 1 0-4h4.6a14.7 14.7 0 0 1 0 4Zm.3 5.6c.6-1.1 1.1-2.3 1.4-3.6h2.9a8 8 0 0 1-4.3 3.6Zm1.7-5.6a16.5 16.5 0 0 0 0-4h3.4a8.2 8.2 0 0 1 0 4h-3.4Z"/></svg>Idioma</button>
+      <p class="config-grupo">Astra</p>
+      <button class="config-item" type="button" data-sec="dono"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 3h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-4 4v-4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm6 3.5v5h2v-5h-2Zm0 6v2h2v-2h-2Z"/></svg>Fale com o dono</button>
+      <button class="config-item" type="button" data-sec="sobre"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 15h-2v-6h2v6Zm0-8h-2V7h2v2Z"/></svg>Sobre o Astra</button>
+    </nav>
+    <div class="config-conteudo">
+      <header class="config-topo"><b id="config-titulo">Minha conta</b>
+        <button id="config-fechar" class="config-fechar" type="button" title="Fechar (Esc)" aria-label="Fechar"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19 5 17.6 10.6 12 5 6.4Z"/></svg><small>ESC</small></button>
+      </header>
+      <div class="config-corpo">
+        <section class="config-sec" data-sec="conta">
+          <h2>Minha conta</h2>
+          <div class="config-linha"><div><b>Perfil</b><small>Foto, capa, cor, recado e Conectar com o Discord.</small></div><button class="bt primario" type="button" data-abrir="meu-avatar">Editar perfil</button></div>
+          <div class="config-linha"><div><b>Nome de exibição</b><small>É o nome que todo mundo vê nas salas, no chat e na lista. Pode repetir. Em branco, aparece o seu nome de usuário.</small><form id="cfg-exibicao" class="cfg-exibicao"><input id="cfg-exibicao-in" maxlength="32" autocomplete="off" placeholder="Igual ao nome de usuário"><button class="bt primario pequeno">Salvar</button></form></div></div>
+          <div class="config-linha"><div><b>Nome de usuário</b><small id="cfg-nome-atual"></small></div><button class="bt secundario" type="button" data-abrir="bt-meu-nome">Mudar</button></div>
+          <div class="config-linha"><div><b>ID do Astra</b><small id="cfg-meu-id"></small></div><button id="cfg-copiar-id" class="bt secundario" type="button">Copiar</button></div>
+          <div class="config-linha"><div><b>Código de recuperação</b><small id="cfg-recuperacao-txt">Se formatar o PC, é com ele que a sua conta volta.</small></div><button id="cfg-recuperacao" class="bt primario" type="button">Gerar código</button></div>
+          <div class="config-linha"><div><b>Trocar de conta</b><small>Tem o código de outra conta? Cole aqui para entrar nela.</small></div><button id="cfg-recuperar" class="bt secundario" type="button">Usar código</button></div>
+          <div class="config-linha"><div><b>Sair da conta</b><small>Tira esta conta deste aparelho. Para voltar depois, use o código de recuperação.</small></div><button id="cfg-sair" class="bt secundario conta-perigo" type="button">Sair</button></div>
+          <hr>
+          <h3>Status</h3>
+          <div id="cfg-status" class="config-opcoes" role="radiogroup" aria-label="Status"></div>
+        </section>
+        <section class="config-sec" data-sec="privado" hidden>
+          <h2>Mensagens privadas</h2>
+          <p class="sub">Conversas criptografadas entre os aparelhos: o servidor só repassa. Elas ficam salvas neste aparelho. A trava de tela com PIN e o botão CL ficam dentro da janela do privado.</p>
+          <div class="config-linha"><div><b>Abrir as conversas</b><small id="cfg-pv-txt">Nenhuma mensagem nova.</small></div><button class="bt primario" type="button" data-abrir="bt-privado">Abrir</button></div>
+          <label class="config-linha"><div><b>Só amigos me mandam mensagem</b><small>Quem não é seu amigo não consegue te mandar mensagem privada.</small></div><input id="cfg-pv-amigos" type="checkbox" class="chave"></label>
+          <div class="config-linha"><div><b>Amigos e bloqueados</b><small>Adicionar, excluir, aceitar pedidos e desbloquear.</small></div><button class="bt secundario" type="button" data-abrir="trilho-amigos">Abrir</button></div>
+          <hr>
+          <h3>Privacidade</h3>
+          <label class="config-linha"><div><b>Esconder meu IP em todas as salas</b><small>Nas salas públicas, na voz e para quem assiste pelo link o seu IP já fica escondido (tudo passa pelo servidor da Astra). Ligado, vale também nas salas com senha ou aprovação. Pode deixar a tela um pouco mais lenta.</small></div><input id="cfg-ip-sempre" type="checkbox" class="chave"></label>
+          <label class="config-linha"><div><b>Conexão direta (menos ping)</b><small>Por padrão a tela e a voz passam pelo servidor da Astra, que fica no Brasil: protege o seu IP. Ligado, a conexão vai direto entre você e a outra pessoa quando ela também ligou, o que pode tirar mais um pouco do ping. Em troca, quem estiver conectado direto com você consegue ver o seu IP.</small></div><input id="cfg-direto" type="checkbox" class="chave"></label>
+          <div class="config-linha"><div><b>Código do aparelho</b><small>Para os banimentos valerem de verdade, o Astra manda um código embaralhado deste aparelho (no PC, um resumo do ID do Windows e da placa-mãe; no celular, o do app; no navegador, um código aleatório). O servidor embaralha de novo antes de guardar: não dá para descobrir o número real a partir dele, e ele só é usado para banir quem quebra as regras.</small></div></div>
+        </section>
+        <section class="config-sec" data-sec="aparencia" hidden>
+          <h2>Aparência</h2>
+          <div class="config-linha"><div><b>Tema e papel de parede</b><small>All black, foto de fundo, desfoque e transparência dos painéis.</small></div><button class="bt primario" type="button" data-abrir="bt-tema">Abrir</button></div>
+        </section>
+        <section class="config-sec" data-sec="avisos" hidden>
+          <h2>Notificações</h2>
+          <label class="config-linha"><div><b>Pop-up das mensagens</b><small>As mensagens do chat aparecem por cima do jogo.</small></div><input id="cfg-popup" type="checkbox" class="chave"></label>
+          <label class="config-linha"><div><b>Esconder o chat enquanto transmito</b><small>Ao vivo, as mensagens não aparecem por cima do jogo. (Quem assiste nunca vê esse chat: ele fica fora da transmissão.)</small></div><input id="cfg-chat-live" type="checkbox" class="chave"></label>
+          <label class="config-linha"><div><b>Acorde</b><small>Quem transmite pode tocar a campainha para chamar você.</small></div><input id="cfg-acorde" type="checkbox" class="chave"></label>
+          <label class="config-linha"><div><b>Mini tela automática</b><small>Ao minimizar assistindo alguém, a tela continua numa janelinha.</small></div><input id="cfg-mini" type="checkbox" class="chave"></label>
+          <p class="sub">No status <b>Não perturbe</b> o Windows não mostra notificações do Astra.</p>
+        </section>
+        <section class="config-sec" data-sec="teclas" hidden>
+          <h2>Teclas</h2>
+          <div class="config-linha"><div><b>Tecla de emergência</b><small>Apaga na hora todos os rabiscos da tela. Se você está transmitindo, some para todo mundo que assiste. Funciona até com o jogo na frente.</small></div>
+            <div class="tecla-caixa"><button id="cfg-tecla" class="bt secundario tecla-bt" type="button">Escolher tecla</button><button id="cfg-tecla-tirar" class="bt secundario" type="button" hidden>Tirar</button></div></div>
+          <p id="cfg-tecla-msg" class="sub"></p>
+        </section>
+        <section class="config-sec" data-sec="extras" hidden>
+          <h2>Extras e minigames</h2>
+          <div class="config-linha"><div><b>MyWaifu e outros extras</b><small>Tudo opcional. Ligue só o que quiser.</small></div><button class="bt primario" type="button" data-abrir="bt-extras">Abrir</button></div>
+        </section>
+        <section class="config-sec" data-sec="voz" hidden>
+          <h2>Voz e áudio</h2>
+          <div class="config-linha"><div><b>Microfone</b><small>Qual microfone a voz das salas usa.</small></div><select id="voz-cfg-mic" class="voz-cfg-sel"></select></div>
+          <div class="config-linha"><div><b>Onde ouvir</b><small id="voz-cfg-saida-txt">Fone ou caixa de som em que você ouve a voz.</small></div><select id="voz-cfg-saida" class="voz-cfg-sel"></select></div>
+          <div class="config-linha"><div><b>Volume da voz</b><small>Volume geral de quem fala. Para mudar o de uma pessoa, clique no nome dela na barra da voz.</small></div><input id="voz-cfg-vol" type="range" min="0" max="200" step="5" value="100" aria-label="Volume da voz"></div>
+          <hr>
+          <h3>Como o microfone liga</h3>
+          <div class="config-linha"><div><b>Modo</b><small>Detecção de voz liga sozinho quando você fala. Apertar para falar só manda o som segurando a tecla (com o site aberto na frente).</small></div><select id="voz-cfg-modo" class="voz-cfg-sel"><option value="voz">Detecção de voz</option><option value="ptt">Apertar para falar</option></select></div>
+          <div class="config-linha" id="voz-cfg-linha-tecla" hidden><div><b>Tecla</b><small>Clique e aperte a tecla que você quer usar.</small></div><button id="voz-cfg-tecla" class="bt secundario" type="button">V</button></div>
+          <div class="config-linha voz-larga" id="voz-cfg-linha-sens"><div><b>Sensibilidade e teste</b><small id="voz-cfg-sens-txt">Arraste a marca: abaixo dela o microfone fica fechado.</small></div><button id="voz-cfg-testar" class="bt secundario" type="button">Testar</button><div class="voz-sens"><div class="voz-medidor"><i id="voz-cfg-nivel"></i></div><input id="voz-cfg-sens" type="range" min="0" max="100" value="10" aria-label="Sensibilidade do microfone"></div></div>
+          <div class="config-linha"><div><b>Supressão de ruído</b><small>Tira ventilador, teclado e barulho de fundo.</small></div><select id="voz-cfg-ruido" aria-label="Supressão de ruído"><option value="0">Desligada</option><option value="1">Normal</option><option value="2">Forte (IA)</option></select></div>
+          <div class="config-linha"><div><b>Cancelamento de eco</b><small>Evita que os outros se escutem de volta quando você usa caixa de som.</small></div><input id="voz-cfg-eco" type="checkbox" checked aria-label="Cancelamento de eco"></div>
+          <p class="sub">Atalho: Ctrl+Shift+M liga/desliga o microfone durante a chamada.</p>
+          <p id="voz-cfg-msg" class="sub"></p>
+        </section>
+        <section class="config-sec" data-sec="idioma" hidden>
+          <h2>Idioma</h2>
+          <div class="config-linha"><div><b>Idioma do app</b><small>Escolha o idioma do app. Fica guardado neste aparelho.</small></div><select id="cfg-idioma" class="voz-cfg-sel" aria-label="Idioma"><option value="pt">Português</option><option value="en">English</option><option value="es">Español</option></select></div>
+        </section>
+        <section class="config-sec" data-sec="dono" hidden>
+          <h2>Fale com o dono</h2>
+          <div class="config-linha"><div><b>Ideias e problemas</b><small>Sua mensagem vai direto para o dono do Astra.</small></div><button class="bt primario" type="button" data-abrir="bt-relato">Escrever</button></div>
+        </section>
+        <section class="config-sec" data-sec="sobre" hidden>
+          <h2>Sobre o Astra</h2>
+          <div class="config-linha"><div><b>Versão</b><small id="cfg-versao"></small></div><button class="bt secundario" type="button" data-abrir="modal-livre">Por que é livre</button></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Criar sala (v5): nome, banner opcional e quem pode entrar. Os campos são os mesmos de antes (app.js). -->
+<div id="modal-criar" class="modal v5-modal-criar" hidden>
+  <form id="form-criar" class="modal-caixa pequena v5-criar" role="dialog" aria-labelledby="criar-titulo" novalidate>
+    <header class="v5-criar-cab">
+      <h2 id="criar-titulo">Criar sala</h2>
+      <button type="button" class="config-fechar" id="criar-fechar" aria-label="Fechar"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19 5 17.6 10.6 12 5 6.4Z"/></svg></button>
+    </header>
+    <!-- banner opcional: prévia do card como vai aparecer na lista -->
+    <button type="button" class="v5-criar-banner" id="criar-banner" aria-label="Escolher um banner (opcional)">
+      <span class="v5-criar-banner-img" id="criar-banner-img"></span>
+      <span class="v5-criar-banner-txt" id="criar-banner-txt">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+        Banner da sala <small>(opcional)</small></span>
+    </button>
+    <button type="button" class="link-discreto" id="criar-banner-tirar" hidden>Tirar o banner</button>
+    <input id="in-banner-sala" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+    <label class="v5-rotulo" for="in-nome-sala">Nome da sala</label>
+    <input id="in-nome-sala" maxlength="40" placeholder="Ex.: Jogatina" autocomplete="off">
+    <div class="iv-chips" aria-label="Sugestões de nome">
+      <button type="button" data-nome="Jogatina">Jogatina</button>
+      <button type="button" data-nome="Sessão de filme">Filme</button>
+      <button type="button" data-nome="Ranked">Ranked</button>
+      <button type="button" data-nome="Só de boa">Só de boa</button>
+    </div>
+    <span class="v5-rotulo">Quem pode entrar</span>
+    <div class="privacidade" role="radiogroup" aria-label="Quem pode entrar">
+      <button type="button" role="radio" data-acesso="publica" aria-checked="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>Pública</button>
+      <button type="button" role="radio" data-acesso="senha" aria-checked="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Com senha</button>
+      <button type="button" role="radio" data-acesso="aprovacao" aria-checked="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>Aprovação</button>
+    </div>
+    <p class="privacidade-dica" id="privacidade-dica">Aparece na lista e qualquer pessoa entra na hora.</p>
+    <div class="campo-senha" id="campo-senha" hidden>
+      <input id="in-senha-sala" type="password" maxlength="64" minlength="4" placeholder="Senha da sala (mín. 4 caracteres)" autocomplete="new-password" aria-label="Senha da sala">
+      <button type="button" class="ver-senha" data-ver="in-senha-sala" aria-label="Mostrar a senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0"/><circle cx="12" cy="12" r="3"/></svg></button>
+    </div>
+    <p class="msg" id="criar-msg" role="alert"></p>
+    <div class="modal-rodape">
+      <button type="button" class="bt secundario" id="criar-cancelar">Cancelar</button>
+      <button class="bt primario" type="submit">Criar sala</button>
+    </div>
+  </form>
+</div>
+
+<div id="modal-nome" class="modal" hidden>
+  <form id="form-nome" class="modal-caixa pequena">
+    <h2>Qual vai ser o seu nome de usuário?</h2>
+    <p class="sub">É por ele que os amigos te acham e te adicionam, e cada um é de uma pessoa só. O nome que aparece para os outros (nome de exibição) você escolhe depois em Configurações &gt; Minha conta.</p>
+<p class="sub nick-raros-info">Nomes de usuário curtos são disputados: com 4 letras custam 3.000 AstraDoll, com 3 custam 15.000 e com 1 ou 2, 50.000.</p>
+    <input id="in-nome" maxlength="24" required autocomplete="off">
+    <p id="msg-nome" class="msg" role="alert"></p>
+    <p id="frase-nick" class="frase-nick"></p>
+    <button id="nome-ja-tenho" class="link-discreto conta-ja-tenho" type="button">Já tenho conta (formatei ou troquei de PC)</button>
+    <div class="modal-rodape"><button class="bt primario" type="submit">Pronto</button></div>
+  </form>
+</div>
+
+<!-- Recuperar a conta (2.7.28): gerar o código ou usar um -->
+<div id="modal-conta" class="modal" hidden>
+  <div class="modal-caixa pequena" role="dialog" aria-modal="true" aria-labelledby="conta-titulo">
+    <h2 id="conta-titulo">Código de recuperação</h2>
+    <p id="conta-sub" class="sub"></p>
+    <div id="conta-codigo" class="conta-codigo" hidden><code id="conta-codigo-txt"></code><button id="conta-copiar" class="bt secundario" type="button">Copiar</button></div>
+    <input id="conta-in" class="conta-in" placeholder="ASTRA-XXXX-XXXX-XXXX-XXXX" maxlength="40" autocomplete="off" spellcheck="false" aria-label="Código de recuperação" hidden>
+    <p id="conta-msg" class="msg" role="alert"></p>
+    <div class="modal-rodape"><button id="conta-fechar" class="bt secundario" type="button">Fechar</button><button id="conta-extra" class="bt secundario conta-perigo" type="button" hidden>Sair mesmo assim</button><button id="conta-ok" class="bt primario" type="button">Gerar código</button></div>
+  </div>
+</div>
+
+<!-- "livre" (rodapé): sobre o programa -->
+<div id="modal-livre" class="modal" hidden>
+  <div class="modal-caixa pequena livre" role="dialog" aria-labelledby="livre-titulo">
+    <h2 id="livre-titulo">Astra <small id="livre-versao"></small></h2>
+    <p>Feito para uso livre. O código do programa de PC é publicado.</p>
+    <p>A sua tela não é gravada. Em sala pública e no Modo leve ela passa pelo servidor da Astra.</p>
+    <p>Mensagens e imagens somem quando todos saem da sala.</p>
+    <p class="livre-fim">rejeite as big techs.</p>
+    <div class="modal-rodape"><button id="livre-fechar" class="bt" type="button">Fechar</button></div>
+  </div>
+</div>
+
+<!-- Novidades (patch notes): bloquinho discreto ao abrir o programa -->
+<aside id="novidades" class="novidades" hidden aria-live="polite">
+  <div class="novidades-topo"><span>📝 Atualização</span>
+    <button id="novidades-fechar" class="bt-icone" type="button" title="Fechar" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12 19 17.6 17.6 19 12 13.4 6.4 19 5 17.6 10.6 12 5 6.4Z"/></svg>
+    </button>
+  </div>
+  <div id="novidades-lista" class="novidades-lista"></div>
+  <p class="novidades-fim">Obrigado por ajudar a melhorar o Astra 💜</p>
+</aside>
+
+<!-- Conversa direta com o dono do Astra (ideias e problemas) -->
+<div id="modal-relato" class="modal" hidden>
+  <form id="form-relato" class="modal-caixa pequena" role="dialog" aria-labelledby="relato-titulo">
+    <h2 id="relato-titulo">Fale com o dono</h2>
+    <p class="sub">Mande uma ideia ou avise de um problema: vai direto para o dono do Astra. Quando a sua ideia virar novidade, o seu nome aparece nela.</p>
+    <div class="relato-tipos" role="radiogroup" aria-label="Tipo">
+      <button type="button" class="relato-tipo ativo" data-tipo="ideia" role="radio" aria-checked="true">💡 Ideia</button>
+      <button type="button" class="relato-tipo" data-tipo="sugestao" role="radio" aria-checked="false">✨ Sugestão</button>
+      <button type="button" class="relato-tipo" data-tipo="problema" role="radio" aria-checked="false">⚠️ Problema</button>
+    </div>
+    <textarea id="relato-texto" maxlength="1500" rows="4" placeholder="Escreva aqui..."></textarea>
+    <p id="relato-msg" class="sub" role="status"></p>
+    <div class="modal-rodape">
+      <button id="relato-cancelar" class="bt secundario" type="button">Fechar</button>
+      <button id="relato-enviar" class="bt" type="submit">Enviar</button>
+    </div>
+  </form>
+</div>
+
+<!-- Imagem do chat em tamanho grande -->
+<div id="modal-imagem" class="modal visor" hidden>
+  <img id="visor-img" alt="Imagem do chat">
+  <button id="visor-fechar" class="bt pequeno visor-fechar" type="button">Fechar</button>
+</div>
+
+<!-- Extras e minigames (cada pessoa escolhe se instala) -->
+<!-- Tema do programa (fica só neste aparelho) -->
+<div id="modal-tema" class="modal" hidden>
+  <div class="modal-caixa pequena" role="dialog" aria-labelledby="tema-titulo">
+    <h2 id="tema-titulo">Tema</h2>
+    <p class="sub">Muda só as cores do programa. A transmissão continua igual.</p>
+    <div class="temas">
+      <button class="tema-op" data-tema="" type="button"><span class="tema-mini t-escuro"><i></i><i></i><i></i></span>Escuro</button>
+      <button class="tema-op" data-tema="preto" type="button"><span class="tema-mini t-preto"><i></i><i></i><i></i></span>All black</button>
+      <button class="tema-op" data-tema="claro" type="button"><span class="tema-mini t-claro"><i></i><i></i><i></i></span>Claro</button>
+    </div>
+    <h3 class="papel-titulo">Papel de parede</h3>
+    <div class="papel-linha">
+      <div id="papel-mini" class="papel-mini"><span>Sem papel de parede</span></div>
+      <div class="papel-botoes">
+        <button id="papel-escolher" class="bt primario pequeno" type="button">Escolher foto</button>
+        <button id="papel-ajustar" class="bt secundario pequeno" type="button" hidden>Ajustar</button>
+        <button id="papel-tirar" class="link-discreto" type="button" hidden>Tirar papel de parede</button>
+        <small class="sub">Só você vê. Fica guardado só neste aparelho.</small>
+      </div>
+      <input id="papel-arquivo" type="file" accept="image/*" hidden>
+    </div>
+    <div class="modal-rodape"><button id="tema-fechar" class="bt primario" type="button">Pronto</button></div>
+  </div>
+</div>
+
+<div id="modal-extras" class="modal" hidden>
+  <div class="modal-caixa pequena" role="dialog" aria-labelledby="extras-titulo">
+    <h2 id="extras-titulo">Extras</h2>
+    <p class="sub">Minigames e extras são opcionais: só baixa quem instalar.</p>
+    <ul id="lista-extras" class="lista-extras"></ul>
+    <p id="extras-vazio" class="sub">Nenhum extra ainda. Quando tiver, ele aparece aqui.</p>
+    <div class="modal-rodape">
+      <button id="extras-fechar" class="bt primario" type="button">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Recortar a tela (só quem transmite) -->
+<div id="modal-recorte" class="modal" hidden>
+  <div class="modal-caixa" role="dialog" aria-labelledby="recorte-titulo">
+    <h2 id="recorte-titulo">Recortar a tela</h2>
+    <p class="sub">Arraste por cima da imagem para marcar o pedaço que os amigos vão ver.</p>
+    <div id="recorte-area" class="recorte-area">
+      <video id="recorte-video" muted autoplay playsinline></video>
+      <div id="recorte-sel" class="recorte-sel" hidden></div>
+    </div>
+    <div class="modal-rodape">
+      <button id="recorte-inteira" class="bt link" type="button">Tela inteira</button>
+      <button id="recorte-cancelar" class="bt link" type="button">Cancelar</button>
+      <button id="recorte-ok" class="bt primario" type="button" disabled>Recortar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Foto de perfil -->
+<div id="modal-foto" class="modal" hidden>
+  <div class="modal-caixa perfil-caixa" role="dialog" aria-labelledby="foto-titulo">
+    <h2 id="foto-titulo">Meu perfil</h2>
+    <p class="sub">Tudo aqui é opcional. Os amigos veem na lista e ao passar o mouse no seu nome.</p>
+    <div class="perfil-grade">
+      <div class="perfil-campos">
+        <div id="pp-aparencia">
+          <div id="discord-secao" hidden>
+            <label class="perfil-rotulo">Servidor do Discord</label>
+            <div id="discord-caixa" class="discord-caixa"></div>
+          </div>
+          <label class="perfil-rotulo">Foto (pode ser GIF)</label>
+          <div class="perfil-linha">
+            <span id="foto-previa" class="avatar"></span>
+            <input id="in-foto" type="file" accept="image/*" hidden>
+            <button id="foto-escolher" class="bt primario pequeno" type="button">Escolher foto ou GIF</button>
+            <button id="foto-remover" class="bt perigo pequeno" type="button">Tirar</button>
+          </div>
+          <label class="perfil-rotulo">Capa (foto, GIF ou degradê)</label>
+          <div id="capa-editor" class="capa-editor" title="Arraste para cima ou para baixo para ajustar">
+            <span id="capa-dica" class="capa-dica">Arraste para ajustar a posição</span>
+          </div>
+          <input id="in-capa" type="file" accept="image/*" hidden>
+          <div class="perfil-linha">
+            <button id="capa-escolher" class="bt primario pequeno" type="button">Escolher foto ou GIF</button>
+            <span class="perfil-fraco">ou</span>
+            <span id="capa-degrades" class="capa-degrades"></span>
+            <button id="capa-remover" class="bt perigo pequeno" type="button">Sem capa</button>
+          </div>
+          <label class="perfil-rotulo" for="in-forca">Força da capa na lista</label>
+          <div class="perfil-linha perfil-fraco">suave <input id="in-forca" type="range" min="15" max="100" value="60"> forte</div>
+          <label class="perfil-rotulo">Cor da moldura e do nick</label>
+          <div id="perfil-cores" class="perfil-cores"></div>
+          <label class="perfil-rotulo" for="in-recado">Recado (aparece embaixo do nick)</label>
+          <div class="perfil-linha">
+            <input id="in-recado" maxlength="60" placeholder="Ex.: jogando de boa" autocomplete="off">
+            <select id="sel-recado-horas" class="sel" title="Quando o recado some">
+              <option value="0">Não some</option><option value="1">Some em 1 hora</option>
+              <option value="4">Some em 4 horas</option><option value="8">Some em 8 horas</option>
+              <option value="24">Some em 1 dia</option>
+            </select>
+          </div>
+          <div id="recados-prontos" class="recados-prontos"></div>
+        </div>
+      </div>
+      <div class="perfil-previa">
+        <label class="perfil-rotulo">Como os outros te veem</label>
+        <ul id="previa-lista" class="lista"></ul>
+        <label class="perfil-rotulo">Com o mouse em cima</label>
+        <div id="previa-cartao"></div>
+      </div>
+    </div>
+    <div class="modal-rodape">
+      <button id="foto-fechar" class="bt secundario" type="button">Cancelar</button>
+      <button id="perfil-salvar" class="bt verde" type="button">Salvar perfil</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cartãozinho do perfil (ao passar o mouse no nome de alguém) -->
+<div id="cartao-perfil" class="cartao-perfil flutuante" hidden></div>
+
+<!-- Baixar a versão mais nova (PC e celular) -->
+<div id="modal-baixar" class="modal" hidden>
+  <div class="modal-caixa pequena" role="dialog" aria-labelledby="baixar-titulo">
+    <h2 id="baixar-titulo">Baixar o AstraScreenShare</h2>
+    <p id="baixar-minha" class="sub"></p>
+    <div class="baixar-lista">
+      <div id="baixar-pc" class="baixar-item">
+        <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M21 3H3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h7v2H8v2h8v-2h-2v-2h7a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm0 13H3V5h18v11Z"/></svg>
+        <div><b>PC (Windows)</b><span class="sub"></span></div>
+        <a class="bt primario pequeno">Baixar</a>
+      </div>
+      <div id="baixar-android" class="baixar-item">
+        <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M16 1H8a3 3 0 0 0-3 3v16a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V4a3 3 0 0 0-3-3Zm1 19a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16Zm-5-3a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"/></svg>
+        <div><b>Celular (Android)</b><span class="sub"></span></div>
+        <a class="bt primario pequeno">Baixar</a>
+      </div>
+    </div>
+    <p id="baixar-dica" class="sub"></p>
+    <div class="modal-rodape"><button id="baixar-fechar" class="bt secundario" type="button">Fechar</button></div>
+  </div>
+</div>
+
+<!-- Escolher o que transmitir (programa de PC) -->
+<div id="seletor" class="modal" hidden>
+  <div class="modal-caixa" role="dialog" aria-labelledby="seletor-titulo">
+    <h2 id="seletor-titulo">Transmitir tela</h2>
+    <div class="abas">
+      <button class="aba ativa" data-tipo="screen">Telas</button>
+      <button class="aba" data-tipo="window">Janelas</button>
+    </div>
+    <div id="seletor-lista" class="seletor-lista"></div>
+    <div class="opcoes">
+      <label>Qualidade
+        <select id="op-qualidade" class="sel">
+          <option value="720-30">720p · 30 qps</option>
+          <option value="1080-30">1080p · 30 qps</option>
+          <option value="1080-60" selected>1080p · 60 qps (recomendada)</option>
+          <option value="orig-60">Original · 60 qps</option>
+          <option value="4k-60">4K · 60 qps (upload bom)</option>
+        </select>
+      </label>
+      <label>Som
+        <select id="op-som" class="sel">
+          <option value="sem-discord" selected>Som do PC, sem as vozes do Discord</option>
+          <option value="janela">Só o som da janela escolhida</option>
+          <option value="tudo">Todo o som do PC</option>
+          <option value="nenhum">Sem som</option>
+        </select>
+      </label>
+      <label>Conteúdo
+        <select id="op-modo" class="sel">
+          <option value="motion">Fluido (jogos e vídeos)</option>
+          <option value="detail">Nítido (textos)</option>
+        </select>
+      </label>
+      <label>Notificações
+        <select id="op-notif" class="sel" title="Enquanto você está ao vivo, sua conta fica em Não perturbe e as notificações do Astra não aparecem">
+          <option value="esconder" selected>Esconder as do Astra</option>
+          <option value="mostrar">Mostrar</option>
+        </select>
+        <small class="op-dica">Discord, WhatsApp e outros: ligue o Não perturbe do Windows (Win+N) antes de começar. O Windows 11 não deixa o Astra ligar sozinho.</small>
+      </label>
+      <label id="op-teclas-caixa" hidden>Mostrar teclas apertadas
+        <select id="op-teclas" class="sel" title="Quem assiste vê as teclas que você aperta (bom para ensinar). Não use enquanto digita senhas.">
+          <option value="nao" selected>Não</option>
+          <option value="sim">Sim (não use ao digitar senhas)</option>
+        </select>
+      </label>
+      <label id="op-hw-caixa">Aceleração por hardware
+        <select id="op-hw" class="sel" title="Ligada: o vídeo é feito pela placa de vídeo e sobra processador para o jogo">
+          <option value="sim" selected>Ligada (placa de vídeo)</option>
+          <option value="nao">Desligada (processador)</option>
+        </select>
+      </label>
+      <label id="op-leve-caixa">Modo leve
+        <select id="op-leve" class="sel" title="Ligado: o PC manda a tela uma vez só para a VPS, que repassa a mesma imagem para cada amigo. Gasta bem menos com vários amigos assistindo. A qualidade é a mesma.">
+          <option value="nao" selected>Desligado</option>
+          <option value="sim">Ligado</option>
+        </select>
+      </label>
+      <label id="op-mouse-caixa" hidden>Esconder o mouse em jogos
+        <select id="op-mouse" class="sel" title="Ligado: com um jogo em tela cheia (Valorant etc.) o mouse não aparece na live; na área de trabalho ele aparece normal. Vale para a Tela inteira. Trocar reinicia o Astra.">
+          <option value="sim" selected>Ligado</option>
+          <option value="nao">Desligado</option>
+        </select>
+      </label>
+    </div>
+    <p id="dica-borda" class="sub dica-borda" hidden>A borda amarela/laranja em volta é do próprio Windows: aparece quando o Astra transmite uma <b>janela</b>. Para transmitir sem borda, escolha <b>Tela inteira</b> com “Esconder o mouse em jogos” ligado.</p>
+    <div class="modal-rodape">
+      <button id="seletor-cancelar" class="bt link" type="button">Cancelar</button>
+      <button id="seletor-ok" class="bt primario" type="button" disabled>Entrar ao vivo</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modo Acorde: alguém tocou a campainha -->
+<div id="campainha" class="campainha" hidden>
+  <div class="campainha-caixa" role="alertdialog" aria-labelledby="campainha-titulo">
+    <div class="campainha-foto"><img id="campainha-img" src="acorde.png" alt=""></div>
+    <div class="campainha-ondas"><span></span><span></span><span></span></div>
+    <h2 id="campainha-titulo">ACORDA!</h2>
+    <p id="campainha-texto"></p>
+    <button id="bt-to-vendo" class="bt primario grande">Tô vendo!</button>
+    <button id="bt-sem-acorde" class="link-discreto" type="button">Não quero mais receber o Acorde</button>
+  </div>
+</div>
+
+<div id="avisos" class="avisos" aria-live="polite"></div>
+<div id="alertas-doacao" class="alertas-doacao" aria-live="polite"></div>
+
+<!-- Doar AstraDoll para quem está ao vivo -->
+<div id="modal-doar" class="modal" hidden>
+  <form id="form-doar" class="modal-caixa pequena doar-caixa" role="dialog" aria-labelledby="doar-titulo">
+    <div class="doar-topo">
+      <img src="astradoll.svg" alt="" width="40" height="40">
+      <div><h2 id="doar-titulo">Doar para <span id="doar-nome"></span></h2>
+      <p class="sub">Você tem <b id="doar-saldo">...</b> AstraDoll</p></div>
+    </div>
+    <div class="doar-valores" role="group" aria-label="Valor">
+      <button type="button" class="doar-valor" data-v="10">10</button>
+      <button type="button" class="doar-valor" data-v="25">25</button>
+      <button type="button" class="doar-valor" data-v="50">50</button>
+      <button type="button" class="doar-valor" data-v="100">100</button>
+      <input id="doar-outro" type="number" min="1" max="100000" inputmode="numeric" placeholder="Outro" aria-label="Outro valor">
+    </div>
+    <div>
+      <p class="sub doar-rotulo">Voz</p>
+      <div id="doar-vozes" class="doar-vozes" role="radiogroup" aria-label="Voz"></div>
+    </div>
+    <textarea id="doar-texto" maxlength="140" rows="2" placeholder="Recado (a sala ouve em voz alta)"></textarea>
+    <p id="doar-msg" class="sub" role="status"></p>
+    <div class="modal-rodape">
+      <button id="doar-cancelar" class="bt secundario" type="button">Cancelar</button>
+      <button id="doar-enviar" class="bt" type="submit">Doar</button>
+    </div>
+  </form>
+</div>
+<!-- Player da música (YouTube/SoundCloud): fica aqui fixo, fora das páginas, para nunca recarregar ao navegar -->
+<div id="musica-motor" class="musica-motor" aria-hidden="true">
+  <div class="video-barra" id="video-barra">
+    <span id="video-titulo">Vídeo da sala</span>
+    <button type="button" id="video-tamanho" title="Aumentar / diminuir" aria-label="Aumentar ou diminuir o vídeo">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg>
+    </button>
+    <button type="button" id="video-fechar" title="Esconder o vídeo (a música continua)" aria-label="Esconder o vídeo">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- Miniplayer: aparece quando há música e o painel de música não está na tela -->
+<div id="mini-player" class="mini-player" hidden role="region" aria-label="Música tocando">
+  <button type="button" class="mini-abrir" id="mini-abrir" aria-label="Abrir a música">
+    <img id="mini-capa" alt="" width="40" height="40">
+    <span class="mini-txt"><b id="mini-titulo"></b><small id="mini-onde"></small></span>
+  </button>
+  <button type="button" class="mini-bt" id="mini-pausar" aria-label="Pausar"></button>
+  <button type="button" class="mini-bt" id="mini-pular" aria-label="Pular para a próxima"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" x2="19" y1="5" y2="19"/></svg></button>
+  <i class="mini-andou" id="mini-andou"></i>
+</div>
+
+<!-- Senha da sala (pedida antes de entrar; conferida no servidor) -->
+<div id="modal-senha" class="modal" hidden>
+  <form id="form-senha" class="modal-caixa pequena caixa-senha" role="dialog" aria-labelledby="senha-titulo" novalidate>
+    <span class="caixa-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+    <h2 id="senha-titulo">Sala com senha</h2>
+    <p class="sub" id="senha-sub"></p>
+    <div class="campo-senha">
+      <input id="in-senha-entrar" type="password" maxlength="64" placeholder="Senha" autocomplete="off" aria-label="Senha da sala">
+      <button type="button" class="ver-senha" data-ver="in-senha-entrar" aria-label="Mostrar a senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0"/><circle cx="12" cy="12" r="3"/></svg></button>
+    </div>
+    <p id="senha-erro" class="msg" role="alert"></p>
+    <div class="modal-rodape">
+      <button type="button" class="bt secundario" id="senha-cancelar">Cancelar</button>
+      <button type="submit" class="bt primario" id="senha-entrar">Entrar</button>
+    </div>
+  </form>
+</div>
+
+<!-- Quem pode entrar na sala (só o dono muda) -->
+<div id="modal-acesso" class="modal" hidden>
+  <form id="form-acesso" class="modal-caixa pequena caixa-senha" role="dialog" aria-labelledby="acesso-titulo" novalidate>
+    <h2 id="acesso-titulo">Quem pode entrar</h2>
+    <p class="sub">Vale a partir de agora. Quem já está na sala continua.</p>
+    <div class="privacidade" role="radiogroup" aria-label="Quem pode entrar" id="acesso-opcoes">
+      <button type="button" role="radio" data-acesso="publica" aria-checked="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>Pública</button>
+      <button type="button" role="radio" data-acesso="senha" aria-checked="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Com senha</button>
+      <button type="button" role="radio" data-acesso="aprovacao" aria-checked="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>Aprovação</button>
+    </div>
+    <div class="campo-senha" id="acesso-campo-senha" hidden>
+      <input id="in-acesso-senha" type="password" maxlength="64" placeholder="Nova senha (mín. 4 caracteres)" autocomplete="new-password" aria-label="Nova senha">
+      <button type="button" class="ver-senha" data-ver="in-acesso-senha" aria-label="Mostrar a senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0"/><circle cx="12" cy="12" r="3"/></svg></button>
+    </div>
+    <p id="acesso-erro" class="msg" role="alert"></p>
+    <div class="modal-rodape">
+      <button type="button" class="bt secundario" id="acesso-cancelar">Cancelar</button>
+      <button type="submit" class="bt primario">Salvar</button>
+    </div>
+  </form>
+</div>
+
+<script src="abertura.js?v=5"></script>
+<script src="celular.js"></script>
+<script src="desktop.js"></script>
+<script src="app.js?v=42"></script>
+<script src="voz.js?v=12"></script>
+<script src="inicio.js?v=5"></script>
+<script src="aposta.js"></script>
+<script src="correio.js?v=2"></script>
+<script src="privado.js?v=4"></script>
+<script src="grupos.js?v=3"></script>
+<script src="amigos.js?v=7"></script>
+<script src="papel.js"></script>
+<script src="trava.js"></script>
+<script src="config.js?v=4"></script>
+<script src="meu-cartao.js?v=3"></script>
+<script src="rehbet-ponte.js?v=1" defer></script>
+<script src="rehbet-barra.js?v=3" defer></script>
+<script src="nav.js?v=11"></script>
+<script src="jam.js?v=6"></script>
+<script src="v5.js?v=12"></script>
+  <script src="atualizar.js?v=1"></script>
+  <script src="idioma.js?v=5"></script>
+  <script src="recuperar.js?v=3"></script>
+  <script src="sala-link.js?v=1"></script>
+  <script src="perfil-link.js?v=1"></script>
+  <script src="suporte.js?v=1"></script>
+<script src="discord-barra.js?v=1" defer></script>
+</body>
+</html>

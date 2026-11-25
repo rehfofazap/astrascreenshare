@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; connect-src ipc: http://ipc.localhost; style-src 'unsafe-inline'; img-src https: data:">
+<title>AstraScreenShare - mensagens</title>
+<style>
+  /* Chat de live por cima do jogo: sem fundo, texto com sombra (estilo overlay).
+     As medidas são de uma tela de 670 px de largura; o main.js aumenta tudo
+     (setZoomFactor) na proporção da tela de verdade. */
+  html, body { margin: 0; background: transparent; overflow: hidden; font: 600 9.5px/1.3 "Segoe UI", system-ui, sans-serif; color: #eee; }
+  #lista { display: flex; flex-direction: column; gap: 2px; padding: 4px 6px; }
+  .l { display: flex; gap: 5px; align-items: flex-start; padding: 1px 3px; border-radius: 4px;
+       text-shadow: 0 0 3px #000, 0 1px 2px #000, 0 0 6px rgba(0,0,0,.8); animation: entra .25s ease-out backwards;
+       transition: opacity .6s; }
+  .l.velha { opacity: .55; }
+  .l.saindo { opacity: 0; transform: translateY(-4px); transition: opacity .4s, transform .4s; }
+  .av { width: 12px; height: 12px; border-radius: 50%; flex: none; margin-top: 0; display: grid; place-items: center;
+        font-size: 6px; font-weight: 800; color: #fff; text-shadow: none; background-size: cover; background-position: center;
+        box-shadow: 0 0 3px rgba(0,0,0,.7); }
+  .corpo { min-width: 0; overflow-wrap: anywhere; }
+  .corpo b { font-weight: 700; margin-right: 4px; }
+  .corpo img { display: block; max-width: 70%; max-height: 48px; margin-top: 2px; border-radius: 4px;
+               box-shadow: 0 1px 5px rgba(0,0,0,.6); }
+  .l.doacao { color: #ffd36b; background: linear-gradient(90deg, rgba(240,178,50,.28), rgba(10,10,14,.35)); box-shadow: inset 2px 0 0 #f0b232; }
+  .l.marcou { background: linear-gradient(90deg, rgba(88,101,242,.30), transparent); box-shadow: inset 2px 0 0 #8a95ff; }
+  /* 2.7.11: aviso de minigame (ex.: "MyWaifu: fulano pegou ..."): fundo escuro para ler em cima de qualquer coisa */
+  .l.jogo { background: linear-gradient(90deg, rgba(18,18,22,.92), rgba(18,18,22,.84)); box-shadow: inset 2px 0 0 #e879b9, 0 2px 8px rgba(0,0,0,.35);
+            padding: 3px 7px 3px 5px; border-radius: 6px; text-shadow: none; font-weight: 500; color: #e6e6ea; }
+  .l.jogo b { color: #f5a3cf; font-weight: 700; }
+  .l.jogo .av { background-color: #2a1d26 !important; color: #f5a3cf; box-shadow: 0 0 0 1px rgba(232,121,185,.5); }
+  @keyframes entra { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<div id="lista"></div>
+<script src="astra-popup.js"></script>
+</body>
+</html>
