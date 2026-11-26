@@ -1,0 +1,40 @@
+name: 🐞 algo deu errado
+description: tela travando, som que não sai, transmissão caindo, botão que não funciona...
+labels: [bug]
+body:
+  - type: input
+    id: versao
+    attributes:
+      label: versão do app
+      description: se não souber, fala mais ou menos quando instalou
+      placeholder: "3.0.27"
+    validations:
+      required: true
+  - type: textarea
+    id: oque
+    attributes:
+      label: o que aconteceu?
+      placeholder: comecei a transmitir o jogo e depois de uns 10 min a tela dos meus amigos congelou...
+    validations:
+      required: true
+  - type: textarea
+    id: repetir
+    attributes:
+      label: como repetir
+      description: passo a passo, se souber
+  - type: dropdown
+    id: onde
+    attributes:
+      label: onde
+      options:
+        - transmitindo
+        - assistindo
+        - chat / amigos
+        - música junto
+        - instalar / atualizar
+        - outro
+  - type: input
+    id: pc
+    attributes:
+      label: windows e placa de vídeo
+      placeholder: "windows 11, rtx 3060"

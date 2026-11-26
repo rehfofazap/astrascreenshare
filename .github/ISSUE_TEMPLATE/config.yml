@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🔒 falha de segurança
+    url: https://github.com/rehfofazap/astrascreenshare/security/advisories/new
+    about: manda por aqui (privado), não abre issue pública
+  - name: 💬 suporte no discord
+    url: https://discord.gg/uEqNat9G7X
+    about: dúvida rápida? chama no servidor do astra
+  - name: ⬇️ baixar o astra
+    url: https://astrascreenshare.com
+    about: site oficial

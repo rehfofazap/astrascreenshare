@@ -35,6 +35,8 @@ o astra é um app pra transmitir a tela pros amigos numa sala, tipo uma call só
 2. abre e instala. se o windows reclamar ("o windows protegeu o computador"), clica em **mais informações** e depois **executar assim mesmo**
 3. escolhe seu nome de usuário e pronto
 
+**conferir o download:** cada release tem o sha256 do instalador nas notas. no PowerShell: `Get-FileHash .\AstraScreenShare-Instalador-x.x.x.exe` e compara.
+
 ## como é feito
 
 | pasta | o que tem |
@@ -58,9 +60,11 @@ npx tauri build   # gera o instalador em src-tauri/target/release/bundle
 
 o app confere a assinatura das atualizações com a chave pública que está em `src-tauri/src/atualizar.rs`. build feito por outra pessoa funciona normal, só não recebe atualização automática.
 
+quer ajudar? dá uma olhada no [CONTRIBUTING](CONTRIBUTING.md). bug ou ideia: [abre uma issue](https://github.com/rehfofazap/astrascreenshare/issues/new/choose).
+
 ## segurança
 
-as contas, senhas e salas são conferidas no servidor, não no app. se achar alguma falha, avisa pelo [relato privado de vulnerabilidade](https://github.com/rehfofazap/astrascreenshare/security/advisories/new) em vez de abrir issue pública.
+as contas, senhas e salas são conferidas no servidor, não no app. se achar alguma falha, avisa pelo [relato privado de vulnerabilidade](https://github.com/rehfofazap/astrascreenshare/security/advisories/new) em vez de abrir issue pública. mais detalhes no [SECURITY](SECURITY.md).
 
 ---
 
