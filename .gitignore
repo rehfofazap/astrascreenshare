@@ -8,3 +8,6 @@ astra-audio/target/
 .env*
 .DS_Store
 Thumbs.db
+
+# gerado pelo build (astra-audio/), não vai no repositório
+src-tauri/som/astra-audio.exe

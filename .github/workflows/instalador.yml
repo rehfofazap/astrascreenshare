@@ -1,0 +1,129 @@
+# Gera o instalador do Windows direto do código deste repositório.
+# Com o SignPath configurado (segredo SIGNPATH_API_TOKEN + variáveis SIGNPATH_*), os programas e o
+# instalador saem assinados; sem ele, sai o instalador sem assinatura (para testar o build).
+name: Instalador do Windows
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  instalador:
+    runs-on: windows-latest
+    timeout-minutes: 240
+    env:
+      ALVO: x86_64-pc-windows-msvc
+      TEM_SIGNPATH: ${{ secrets.SIGNPATH_API_TOKEN != '' && 'sim' || 'nao' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Rust
+        run: |
+          rustup toolchain install stable --profile minimal --target $env:ALVO
+          rustup default stable
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            astra-audio/target
+            src-tauri/target
+          key: cargo-${{ hashFiles('astra-audio/Cargo.lock', 'src-tauri/Cargo.lock') }}
+
+      - name: astra-audio (ajudante de som)
+        working-directory: astra-audio
+        run: |
+          cargo build --release --locked --target $env:ALVO
+          New-Item -ItemType Directory -Force ../src-tauri/som | Out-Null
+          Copy-Item target/$env:ALVO/release/astra-audio.exe ../src-tauri/som/astra-audio.exe -Force
+
+      - name: Programa (sem empacotar)
+        run: |
+          npm ci
+          npx tauri build --no-bundle --target $env:ALVO
+
+      - name: Juntar os programas para assinar
+        if: env.TEM_SIGNPATH == 'sim'
+        run: |
+          New-Item -ItemType Directory -Force programas | Out-Null
+          Copy-Item src-tauri/target/$env:ALVO/release/AstraScreenShare.exe programas/
+          Copy-Item src-tauri/som/astra-audio.exe programas/
+
+      - id: programas
+        if: env.TEM_SIGNPATH == 'sim'
+        uses: actions/upload-artifact@v4
+        with:
+          name: programas-sem-assinatura
+          path: programas/
+
+      - name: Assinar os programas (SignPath)
+        if: env.TEM_SIGNPATH == 'sim'
+        uses: signpath/github-action-submit-signing-request@v1
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG }}
+          artifact-configuration-slug: programas
+          github-artifact-id: ${{ steps.programas.outputs.artifact-id }}
+          wait-for-completion: true
+          wait-for-completion-timeout-in-seconds: 7200
+          output-artifact-directory: programas-assinados
+
+      - name: Usar os programas assinados
+        if: env.TEM_SIGNPATH == 'sim'
+        run: |
+          Copy-Item programas-assinados/AstraScreenShare.exe src-tauri/target/$env:ALVO/release/AstraScreenShare.exe -Force
+          Copy-Item programas-assinados/astra-audio.exe src-tauri/som/astra-audio.exe -Force
+
+      - name: Instalador
+        run: |
+          npx tauri bundle --bundles nsis --target $env:ALVO
+          $versao = (Get-Content src-tauri/tauri.conf.json -Raw | ConvertFrom-Json).version
+          $gerado = Get-ChildItem src-tauri/target/$env:ALVO/release/bundle/nsis/*-setup.exe | Select-Object -First 1
+          New-Item -ItemType Directory -Force saida | Out-Null
+          Copy-Item $gerado.FullName "saida/AstraScreenShare-Instalador-$versao.exe"
+
+      - id: instalador
+        if: env.TEM_SIGNPATH == 'sim'
+        uses: actions/upload-artifact@v4
+        with:
+          name: instalador-sem-assinatura
+          path: saida/
+
+      - name: Assinar o instalador (SignPath)
+        if: env.TEM_SIGNPATH == 'sim'
+        uses: signpath/github-action-submit-signing-request@v1
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG }}
+          artifact-configuration-slug: instalador
+          github-artifact-id: ${{ steps.instalador.outputs.artifact-id }}
+          wait-for-completion: true
+          wait-for-completion-timeout-in-seconds: 7200
+          output-artifact-directory: saida
+
+      - name: Resumo
+        run: |
+          Get-ChildItem saida/*.exe | ForEach-Object {
+            $h = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower()
+            $a = (Get-AuthenticodeSignature $_.FullName).Status
+            "- ``$($_.Name)`` — sha256 ``$h`` — assinatura do Windows: $a" | Add-Content $env:GITHUB_STEP_SUMMARY
+          }
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: instalador
+          path: saida/*.exe
